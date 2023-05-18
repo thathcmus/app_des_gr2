@@ -14,8 +14,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         checkStartIntro()
-
-        checkLogin()
     }
     private fun checkStartIntro() {
         val firstUsingPre = getSharedPreferences("firstUsing", Context.MODE_PRIVATE)
@@ -30,9 +28,8 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this, IntroductionActivity::class.java))
             finish()
         } else {
-            // Mở màn hình login
-            startActivity(Intent(this, LoginActivity::class.java))
-            finish()
+            // Check isLoggedIn or no
+            checkLogin()
         }
     }
     private fun checkLogin () {
