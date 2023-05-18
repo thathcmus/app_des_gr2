@@ -1,4 +1,4 @@
-package com.example.plant
+package com.example.plant.activities.ForgotPassword
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -9,6 +9,8 @@ import android.widget.EditText
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import android.util.Patterns
+import com.example.plant.R
+import com.example.plant.activities.Login.LoginActivity
 
 class ForgotAccountActivity : AppCompatActivity() {
     private lateinit var emailEdit: EditText
@@ -20,7 +22,7 @@ class ForgotAccountActivity : AppCompatActivity() {
         setContentView(R.layout.activity_forgot_account)
         mAuth = FirebaseAuth.getInstance()
 
-        emailEdit = findViewById(R.id.email)
+        emailEdit = findViewById(R.id.etForgetEmail)
 
         btnReset = findViewById(R.id.btnReset)
 

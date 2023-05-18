@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools" >
 
     <application
         android:allowBackup="true"
@@ -11,32 +11,26 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light"
-        tools:targetApi="31">
+        tools:targetApi="31" >
         <activity
-            android:name=".HomeActivity"
+            android:name=".activities.Introduction.IntroductionActivity"
             android:exported="false" />
         <activity
-            android:name=".Introduction1"
+            android:name=".activities.Home.HomeActivity"
             android:exported="false" />
         <activity
-            android:name=".Introduction2"
+            android:name=".activities.ForgotPassword.ForgotAccountActivity"
             android:exported="false" />
         <activity
-            android:name=".Introduction3"
+            android:name=".activities.RegisterAccount.RegisterActivity"
             android:exported="false" />
         <activity
-            android:name=".ForgotAccountActivity"
+            android:name=".activities.Login.LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".RegisterActivity"
-            android:exported="false" />
-        <activity
-            android:name=".LoginActivity"
-            android:exported="false" />
-        <activity
-            android:name=".MainActivity"
+            android:name=".activities.Main.MainActivity"
             android:exported="true"
-            android:label="PLANT APP">
+            android:label="PLANT APP" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

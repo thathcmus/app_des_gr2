@@ -1,55 +1,38 @@
-package com.example.plant
+package com.example.plant.activities.Login
 
 import android.content.Context
 import android.content.Intent
-import android.widget.Button
-import android.widget.EditText
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
-import android.widget.CheckBox
 import android.widget.Toast
+import com.example.plant.activities.ForgotPassword.ForgotAccountActivity
+import com.example.plant.activities.Home.HomeActivity
+import com.example.plant.R
+import com.example.plant.activities.RegisterAccount.RegisterActivity
 import com.google.firebase.auth.FirebaseAuth
+import kotlinx.android.synthetic.main.activity_login.btnForgot
+import kotlinx.android.synthetic.main.activity_login.btnLogin
+import kotlinx.android.synthetic.main.activity_login.btnRegister
+import kotlinx.android.synthetic.main.activity_login.checkboxRemember
+import kotlinx.android.synthetic.main.activity_login.etEmail
+import kotlinx.android.synthetic.main.activity_login.etPassword
 
 class LoginActivity : AppCompatActivity() {
-    private lateinit var emailEdit: EditText
-    private lateinit var passwordEdit: EditText
-
-    private lateinit var checkboxRemember: CheckBox
-
-    private lateinit var btnLogin: Button
-    private lateinit var btnRegister: Button
-    private lateinit var btnForgot: Button
     private lateinit var mAuth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
-        mAuth = FirebaseAuth.getInstance()
 
-        emailEdit = findViewById(R.id.email)
-        passwordEdit = findViewById(R.id.password)
+        //hide action bar
+        supportActionBar?.hide()
+        init()
+        listenerEvent()
 
-        checkboxRemember = findViewById<CheckBox>(R.id.checkboxRemember)
-        val savedAccount = getSharedPreferences("savedAccount", Context.MODE_PRIVATE)
-        val isRemembered = savedAccount.getBoolean("isRemembered", false)
-        val savedEmail = savedAccount.getString("email", "")
-        val savedPassword = savedAccount.getString("password", "")
-
-        checkboxRemember.isChecked = isRemembered
-
-        if (isRemembered) {
-            // Đặt lại email và password đã lưu trữ (nếu có)
-            emailEdit.setText(savedEmail)
-            passwordEdit.setText(savedPassword)
-        }
-
-        btnLogin = findViewById(R.id.btnLogin)
-        btnRegister = findViewById(R.id.btnRegister)
-        btnForgot = findViewById(R.id.btnForgot)
-
-
+    }
+    private fun listenerEvent () {
         btnLogin.setOnClickListener() {
             login()
         }
@@ -60,25 +43,37 @@ class LoginActivity : AppCompatActivity() {
             forgot()
         }
     }
-
+    private fun init() {
+        val savedAccount = getSharedPreferences("savedAccount", Context.MODE_PRIVATE)
+        val isRemembered = savedAccount.getBoolean("isRemembered", false)
+        val savedEmail = savedAccount.getString("email", "")
+        val savedPassword = savedAccount.getString("password", "")
+        checkboxRemember.isChecked = isRemembered
+        if (isRemembered) {
+            // Đặt lại email và password đã lưu trữ (nếu có)
+            etEmail.setText(savedEmail)
+            etPassword.setText(savedPassword)
+        }
+    }
     private fun login(){
-        val emailStr = emailEdit.text.toString().trim()
-        val passStr = passwordEdit.text.toString().trim()
+        mAuth = FirebaseAuth.getInstance()
+        val emailStr = etEmail.text.toString().trim()
+        val passStr = etPassword.text.toString().trim()
         val stillLoginPre = getSharedPreferences("stillLogin", Context.MODE_PRIVATE)
         val savedAccount = getSharedPreferences("savedAccount", Context.MODE_PRIVATE)
 
         if(TextUtils.isEmpty(emailStr)){
-            Toast.makeText(this, "Nhập địa chỉ email!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Enter your email!", Toast.LENGTH_SHORT).show()
             return
         }
         if(TextUtils.isEmpty(passStr)){
-            Toast.makeText(this, "Nhập mật khẩu!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Enter your password!", Toast.LENGTH_SHORT).show()
             return
         }
         mAuth.signInWithEmailAndPassword(emailStr, passStr)
             .addOnCompleteListener(this){task->
                 if (task.isSuccessful()){
-                    Toast.makeText(this, "Đăng nhập thành công!", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Login success!", Toast.LENGTH_SHORT).show()
                     val intent = Intent(this, HomeActivity::class.java)
                     startActivity(intent)
 
@@ -102,7 +97,7 @@ class LoginActivity : AppCompatActivity() {
                 }
                 else
                 {
-                    Toast.makeText(this, "Đăng nhập thất bại!", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Login Failed!", Toast.LENGTH_SHORT).show()
                 }
 
             }

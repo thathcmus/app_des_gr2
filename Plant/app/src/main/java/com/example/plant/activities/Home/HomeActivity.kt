@@ -1,10 +1,12 @@
-package com.example.plant
+package com.example.plant.activities.Home
 
 import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import com.example.plant.R
+import com.example.plant.activities.Login.LoginActivity
 
 class HomeActivity : AppCompatActivity() {
     private lateinit var btnLogout: Button
