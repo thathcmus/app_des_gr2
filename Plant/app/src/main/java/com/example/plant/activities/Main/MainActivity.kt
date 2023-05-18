@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity() {
         val firstUsingPre = getSharedPreferences("firstUsing", Context.MODE_PRIVATE)
         val hasRunBefore = firstUsingPre.getBoolean("hasRunBefore", false)
 
-        if (hasRunBefore) {
+        if (!hasRunBefore) {
             val editor = firstUsingPre.edit()
             editor.putBoolean("hasRunBefore", true)
             editor.apply()
