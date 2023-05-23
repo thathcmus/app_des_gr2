@@ -11,4 +11,5 @@
     <color name="text_color_light">#6A6F7D</color>
     <color name="btn_color">#2DDA93</color>
     <color name="logo_color">#3FC845</color>
+    <color name="loading_color">#24A570</color>
 </resources>

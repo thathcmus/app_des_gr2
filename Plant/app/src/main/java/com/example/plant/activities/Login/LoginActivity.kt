@@ -11,6 +11,7 @@ import com.example.plant.activities.ForgotPassword.ForgotAccountActivity
 import com.example.plant.activities.Home.HomeActivity
 import com.example.plant.R
 import com.example.plant.activities.RegisterAccount.RegisterActivity
+import com.example.plant.util.ProgressBarLoading
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_login.btnForgot
 import kotlinx.android.synthetic.main.activity_login.btnLogin
@@ -21,7 +22,7 @@ import kotlinx.android.synthetic.main.activity_login.etPassword
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var mAuth: FirebaseAuth
-
+    private val loadingDialog = ProgressBarLoading(this)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
@@ -70,9 +71,11 @@ class LoginActivity : AppCompatActivity() {
             Toast.makeText(this, "Enter your password!", Toast.LENGTH_SHORT).show()
             return
         }
+        loadingDialog.startLoading()
         mAuth.signInWithEmailAndPassword(emailStr, passStr)
             .addOnCompleteListener(this){task->
                 if (task.isSuccessful()){
+                    loadingDialog.hideLoading()
                     Toast.makeText(this, "Login success!", Toast.LENGTH_SHORT).show()
                     val intent = Intent(this, HomeActivity::class.java)
                     startActivity(intent)
@@ -97,6 +100,7 @@ class LoginActivity : AppCompatActivity() {
                 }
                 else
                 {
+                    loadingDialog.hideLoading()
                     Toast.makeText(this, "Login Failed!", Toast.LENGTH_SHORT).show()
                 }
 

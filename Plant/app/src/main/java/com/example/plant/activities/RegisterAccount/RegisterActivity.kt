@@ -11,6 +11,7 @@ import com.google.firebase.auth.FirebaseAuth
 import android.util.Patterns
 import com.example.plant.R
 import com.example.plant.activities.Login.LoginActivity
+import com.example.plant.util.ProgressBarLoading
 import kotlinx.android.synthetic.main.activity_register.btnRegister
 import kotlinx.android.synthetic.main.activity_register.etRegisterEmail
 import kotlinx.android.synthetic.main.activity_register.etRegisterName
@@ -18,7 +19,7 @@ import kotlinx.android.synthetic.main.activity_register.etRegisterPass
 
 class RegisterActivity : AppCompatActivity() {
     private lateinit var mAuth: FirebaseAuth
-
+    private val loadingDialog = ProgressBarLoading(this)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
@@ -61,16 +62,20 @@ class RegisterActivity : AppCompatActivity() {
             return
         }
 
+        loadingDialog.startLoading()
+
         //create account on firebase
         mAuth.createUserWithEmailAndPassword(emailStr, passStr)
             .addOnCompleteListener(this){task->
                 if (task.isSuccessful()){
+                    loadingDialog.hideLoading()
                     Toast.makeText(this, "Create account successed!", Toast.LENGTH_SHORT).show()
                     val intent = Intent(this, LoginActivity::class.java)
                     startActivity(intent)
                 }
                 else
                 {
+                    loadingDialog.hideLoading()
                     Toast.makeText(this, "Create account failed!", Toast.LENGTH_SHORT).show()
                 }
 
