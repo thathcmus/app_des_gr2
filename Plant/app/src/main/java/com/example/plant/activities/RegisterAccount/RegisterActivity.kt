@@ -4,14 +4,15 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
-import android.widget.Button
-import android.widget.EditText
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import android.util.Patterns
 import com.example.plant.R
 import com.example.plant.activities.Login.LoginActivity
+import com.example.plant.firestore.Firestore
+import com.example.plant.model.User
 import com.example.plant.util.ProgressBarLoading
+import com.google.firebase.auth.FirebaseUser
 import kotlinx.android.synthetic.main.activity_register.btnRegister
 import kotlinx.android.synthetic.main.activity_register.etRegisterEmail
 import kotlinx.android.synthetic.main.activity_register.etRegisterName
@@ -68,10 +69,12 @@ class RegisterActivity : AppCompatActivity() {
         mAuth.createUserWithEmailAndPassword(emailStr, passStr)
             .addOnCompleteListener(this){task->
                 if (task.isSuccessful()){
-                    loadingDialog.hideLoading()
-                    Toast.makeText(this, "Create account successed!", Toast.LENGTH_SHORT).show()
-                    val intent = Intent(this, LoginActivity::class.java)
-                    startActivity(intent)
+                    val firebaseUser: FirebaseUser = task.result!!.user!!
+                    val userInfo = User(
+                        firebaseUser.uid,nameStr,emailStr,"","", "", ""
+                    )
+                    Firestore().registerUser(this,userInfo)
+                    registerSuccess()
                 }
                 else
                 {
@@ -80,5 +83,11 @@ class RegisterActivity : AppCompatActivity() {
                 }
 
             }
+    }
+   private fun registerSuccess () {
+        loadingDialog.hideLoading()
+        Toast.makeText(this, "Create account successed!", Toast.LENGTH_SHORT).show()
+        val intent = Intent(this, LoginActivity::class.java)
+        startActivity(intent)
     }
 }

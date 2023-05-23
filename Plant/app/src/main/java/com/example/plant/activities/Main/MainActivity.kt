@@ -3,10 +3,13 @@ package com.example.plant.activities.Main
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.plant.activities.Home.HomeActivity
 import com.example.plant.activities.Introduction.IntroductionActivity
 import com.example.plant.activities.Login.LoginActivity
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
 class MainActivity : AppCompatActivity() {
 
