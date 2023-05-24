@@ -7,16 +7,18 @@ import android.os.Bundle
 import android.widget.Button
 import com.example.plant.R
 import com.example.plant.activities.Login.LoginActivity
+import com.example.plant.activities.Profile.ProfileActivity
+import kotlinx.android.synthetic.main.activity_home.btnLogout
+import kotlinx.android.synthetic.main.activity_home.btnProfile
 
 class HomeActivity : AppCompatActivity() {
-    private lateinit var btnLogout: Button
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
-
-        btnLogout = findViewById(R.id.btnLogout)
-
+        supportActionBar?.hide()
+        listenerEvent()
+    }
+    fun listenerEvent(){
         btnLogout.setOnClickListener() {
             val stillLoginPre = getSharedPreferences("stillLogin", Context.MODE_PRIVATE)
             val editor = stillLoginPre.edit()
@@ -24,6 +26,12 @@ class HomeActivity : AppCompatActivity() {
             editor.apply()
 
             val intent = Intent(this, LoginActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+
+        btnProfile.setOnClickListener() {
+            val intent = Intent(this,ProfileActivity::class.java)
             startActivity(intent)
             finish()
         }

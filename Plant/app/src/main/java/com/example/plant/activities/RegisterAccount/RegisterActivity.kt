@@ -71,7 +71,7 @@ class RegisterActivity : AppCompatActivity() {
                 if (task.isSuccessful()){
                     val firebaseUser: FirebaseUser = task.result!!.user!!
                     val userInfo = User(
-                        firebaseUser.uid,nameStr,emailStr,0 ,"", "", ""
+                        firebaseUser.uid,nameStr,emailStr, 0 ,"", "", ""
                     )
                     Firestore().registerUser(this,userInfo)
                     registerSuccess()

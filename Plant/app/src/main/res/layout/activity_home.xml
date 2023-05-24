@@ -24,4 +24,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"></Button>
 
+    <Button
+        android:id="@+id/btnProfile"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/btnLogout"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="Profile"
+        android:textSize="20sp"
+        android:textColor="@color/white"
+        android:backgroundTint="@color/btn_color"
+        android:background="@drawable/border_field"
+        />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
