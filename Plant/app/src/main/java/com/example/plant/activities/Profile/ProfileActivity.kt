@@ -37,8 +37,11 @@ class ProfileActivity : AppCompatActivity() {
     fun listenerEvent(){
         editUser.setOnClickListener(){
             val intent = Intent(this, UpdateProfileActivity::class.java)
-            intent.putExtra(constant.USER_DETAIL, currentUser)
+            val bundle = Bundle()
+            bundle.putParcelable(constant.USER_DETAIL, currentUser)
+            intent.putExtras(bundle)
             startActivity(intent)
+            finish()
         }
     }
 }

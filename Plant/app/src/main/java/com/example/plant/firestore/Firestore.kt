@@ -6,6 +6,7 @@ import android.widget.Toast
 import androidx.core.view.isVisible
 import com.example.plant.activities.Profile.ProfileActivity
 import com.example.plant.activities.RegisterAccount.RegisterActivity
+import com.example.plant.activities.UpdateProfile.UpdateProfileActivity
 import com.example.plant.constant.constant
 import com.example.plant.model.User
 import com.example.plant.util.ProgressBarLoading
@@ -37,7 +38,7 @@ class Firestore {
     fun getUserDetail(mActivity: Activity) {
         val loadingDialog = ProgressBarLoading(mActivity)
         loadingDialog.startLoading()
-        mFireStore.collection("users").document(getCurrentUserAuth()!!.uid)
+        mFireStore.collection(constant.USER_COLLECTION).document(getCurrentUserAuth()!!.uid)
             .get()
             .addOnSuccessListener { document ->
                 if (document != null) {
@@ -54,7 +55,25 @@ class Firestore {
                 }
             }
             .addOnFailureListener { exception ->
+                loadingDialog.hideLoading()
                 Log.e("get database", "get userDetail failed", exception)
+            }
+    }
+    fun updateUserInfo(mActivity: Activity, userHashMap: HashMap<String, Any>){
+        val loadingDialog = ProgressBarLoading(mActivity)
+        mFireStore.collection(constant.USER_COLLECTION).document(getCurrentUserAuth()!!.uid)
+            .update(userHashMap)
+            .addOnSuccessListener {
+                when(mActivity) {
+                    is UpdateProfileActivity -> {
+                        mActivity.updateUserSuccessConfirm()
+                    }
+                }
+                loadingDialog.hideLoading()
+            }
+            .addOnFailureListener{ e ->
+                loadingDialog.hideLoading()
+                Log.e("update UserInfo", "update UserInfo failed", e)
             }
     }
 

@@ -11,12 +11,11 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:text="UPDATE PROFILE"
-        app:layout_scrollFlags="scroll|enterAlways"
         android:textSize="20sp"
         android:textStyle="bold"
         android:gravity="center"
         android:textColor="@color/white"
-        android:background="@color/btn_color"
+        android:background="@color/loading_color"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -32,6 +31,7 @@
 
         >
         <ImageView
+            android:id="@+id/ivUpdateUserAvatar"
             android:layout_width="140dp"
             android:layout_height="140dp"
             android:src="@drawable/placeholder"

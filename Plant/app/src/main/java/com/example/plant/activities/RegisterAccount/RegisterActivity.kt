@@ -15,6 +15,7 @@ import com.example.plant.util.ProgressBarLoading
 import com.google.firebase.auth.FirebaseUser
 import kotlinx.android.synthetic.main.activity_register.btnRegister
 import kotlinx.android.synthetic.main.activity_register.etRegisterEmail
+import kotlinx.android.synthetic.main.activity_register.etRegisterLocation
 import kotlinx.android.synthetic.main.activity_register.etRegisterName
 import kotlinx.android.synthetic.main.activity_register.etRegisterPass
 
@@ -36,6 +37,7 @@ class RegisterActivity : AppCompatActivity() {
         val emailStr = etRegisterEmail.text.toString().trim()
         val passStr = etRegisterPass.text.toString().trim()
         val nameStr = etRegisterName.text.toString().trim()
+        val locaStr = etRegisterLocation.text.toString().trim()
         //check fields is empty
         if(TextUtils.isEmpty(emailStr)){
             Toast.makeText(this, "Enter your email!", Toast.LENGTH_SHORT).show()
@@ -45,6 +47,9 @@ class RegisterActivity : AppCompatActivity() {
             return
         }else if(TextUtils.isEmpty(nameStr)){
             Toast.makeText(this, "Enter your Name!", Toast.LENGTH_SHORT).show()
+            return
+        }else if(TextUtils.isEmpty(locaStr)){
+            Toast.makeText(this, "Enter your Address!", Toast.LENGTH_SHORT).show()
             return
         }
         //check email has true format
@@ -71,7 +76,7 @@ class RegisterActivity : AppCompatActivity() {
                 if (task.isSuccessful()){
                     val firebaseUser: FirebaseUser = task.result!!.user!!
                     val userInfo = User(
-                        firebaseUser.uid,nameStr,emailStr, 0 ,"", "", ""
+                        firebaseUser.uid,nameStr,emailStr, 0 ,"", locaStr, ""
                     )
                     Firestore().registerUser(this,userInfo)
                     registerSuccess()
