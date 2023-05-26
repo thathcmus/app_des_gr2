@@ -27,13 +27,11 @@ class HomeActivity : AppCompatActivity() {
 
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
-            finish()
         }
 
         btnProfile.setOnClickListener() {
             val intent = Intent(this,ProfileActivity::class.java)
             startActivity(intent)
-            finish()
-        }
+       }
     }
 }

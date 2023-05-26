@@ -60,7 +60,6 @@ class Firestore {
             }
     }
     fun updateUserInfo(mActivity: Activity, userHashMap: HashMap<String, Any>){
-        val loadingDialog = ProgressBarLoading(mActivity)
         mFireStore.collection(constant.USER_COLLECTION).document(getCurrentUserAuth()!!.uid)
             .update(userHashMap)
             .addOnSuccessListener {
@@ -69,10 +68,8 @@ class Firestore {
                         mActivity.updateUserSuccessConfirm()
                     }
                 }
-                loadingDialog.hideLoading()
             }
             .addOnFailureListener{ e ->
-                loadingDialog.hideLoading()
                 Log.e("update UserInfo", "update UserInfo failed", e)
             }
     }
