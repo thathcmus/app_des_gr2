@@ -27,7 +27,7 @@ class ArticleDetailActivity : AppCompatActivity() {
         articleDetail = bundle?.let { Article::class.getParcelable(it, constant.ARTICLE) }!!
 
         titleArticles.text = articleDetail.title
-        imageViewArticles.setImageResource(articleDetail.avatar)
+        imageViewArticles.setImageResource(articleDetail.image)
         detailArticles.text = articleDetail.name
     }
 
