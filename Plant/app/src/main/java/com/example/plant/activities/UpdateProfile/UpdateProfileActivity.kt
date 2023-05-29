@@ -58,6 +58,7 @@ class UpdateProfileActivity : AppCompatActivity(), View.OnClickListener {
         val bundle = intent.extras
         currentUser = bundle?.let { User::class.getParcelable(it, constant.USER_DETAIL) }!!
 
+        GlideLoader(this@UpdateProfileActivity).loadUserPictureFromUrl(currentUser.avatar, ivUpdateUserAvatar)
         etUpdateName.setText(currentUser?.fullName)
         etUpdateEmail.setText(currentUser?.email)
         etUpdateEmail.isEnabled = false
@@ -173,9 +174,11 @@ class UpdateProfileActivity : AppCompatActivity(), View.OnClickListener {
                         )
                     }
                     loadingDialog.startLoading()
-                    selectedImageUrl = imageUrlDeferred.await()
                     val userHashMap = HashMap<String, Any>()
-                    userHashMap[constant.USER_AVATAR] = selectedImageUrl
+                    if(selectedImageFileUri != null) {
+                        selectedImageUrl = imageUrlDeferred.await()
+                        userHashMap[constant.USER_AVATAR] = selectedImageUrl
+                    }
                     userHashMap[constant.USER_NAME] = userName
                     userHashMap[constant.USER_PHONE] = phoneNum.toString().trim().toLong()
                     userHashMap[constant.USER_GENDER] = gender
