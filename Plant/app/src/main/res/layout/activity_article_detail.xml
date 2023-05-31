@@ -50,6 +50,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
+        android:scaleType="centerCrop"
         app:layout_constraintTop_toBottomOf="@+id/descriptioArticles"
         app:srcCompat="@drawable/a1" />
 
@@ -57,6 +58,7 @@
         android:id="@+id/detailArticles"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+
 
 
         android:text="@string/by_katherine_k"

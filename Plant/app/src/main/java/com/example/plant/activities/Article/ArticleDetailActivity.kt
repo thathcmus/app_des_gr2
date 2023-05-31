@@ -1,12 +1,11 @@
 package com.example.plant.activities.Article
 
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.example.plant.R
 import com.example.plant.constant.constant
 import com.example.plant.model.Article
-import com.example.plant.model.User
 import kotlinx.android.synthetic.main.activity_article_detail.descriptioArticles
 import kotlinx.android.synthetic.main.activity_article_detail.detailArticles
 import kotlinx.android.synthetic.main.activity_article_detail.imageViewArticles
@@ -22,13 +21,14 @@ class ArticleDetailActivity : AppCompatActivity() {
         getArticleDetail()
     }
 
-    fun getArticleDetail () {
+    private fun getArticleDetail () {
         val bundle = intent.extras
         articleDetail = bundle?.let { Article::class.getParcelable(it, constant.ARTICLE) }!!
 
         titleArticles.text = articleDetail.title
+        descriptioArticles.text = articleDetail.descriptionArticles
         imageViewArticles.setImageResource(articleDetail.image)
-        detailArticles.text = articleDetail.name
+        detailArticles.text = articleDetail.detailArticles
     }
 
     inline fun <reified T : Any> KClass<T>.getParcelable(bundle: Bundle, key: String): T? =
