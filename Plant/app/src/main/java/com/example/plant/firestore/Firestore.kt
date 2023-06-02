@@ -3,20 +3,17 @@ package com.example.plant.firestore
 import android.app.Activity
 import android.util.Log
 import android.widget.Toast
-import androidx.core.view.isVisible
-import com.example.plant.activities.Profile.ProfileActivity
+import androidx.fragment.app.Fragment
 import com.example.plant.activities.RegisterAccount.RegisterActivity
-import com.example.plant.activities.UpdateProfile.UpdateProfileActivity
 import com.example.plant.constant.constant
+import com.example.plant.fragment.ProfileFragment
+import com.example.plant.fragment.UpdateProfileFragment
 import com.example.plant.model.User
 import com.example.plant.util.ProgressBarLoading
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import kotlinx.android.synthetic.main.activity_profile.ivLocationIcon
-import kotlinx.android.synthetic.main.activity_profile.tvLocationUser
-import kotlinx.android.synthetic.main.activity_profile.tvNameUser
 
 class Firestore {
     private val mFireStore = Firebase.firestore
@@ -35,7 +32,7 @@ class Firestore {
         return Firebase.auth.currentUser
     }
 
-    fun getUserDetail(mActivity: Activity) {
+    fun getUserDetail(mActivity: Activity,mFragment: Fragment) {
         val loadingDialog = ProgressBarLoading(mActivity)
         loadingDialog.startLoading()
         mFireStore.collection(constant.USER_COLLECTION).document(getCurrentUserAuth()!!.uid)
@@ -43,10 +40,10 @@ class Firestore {
             .addOnSuccessListener { document ->
                 if (document != null) {
                     val currentUser = document.toObject(User::class.java)!!
-                    when(mActivity) {
-                        is ProfileActivity -> {
-                            mActivity.setCurrentUser(currentUser)
-                            mActivity.ShowUIInfo(currentUser)
+                    when(mFragment) {
+                        is ProfileFragment -> {
+                            mFragment.setCurrentUser(currentUser)
+                            mFragment.ShowUIInfo(currentUser)
                         }
                     }
                     loadingDialog.hideLoading()
@@ -59,13 +56,13 @@ class Firestore {
                 Log.e("get database", "get userDetail failed", exception)
             }
     }
-    fun updateUserInfo(mActivity: Activity, userHashMap: HashMap<String, Any>){
+    fun updateUserInfo(mFragment: Fragment, userHashMap: HashMap<String, Any>){
         mFireStore.collection(constant.USER_COLLECTION).document(getCurrentUserAuth()!!.uid)
             .update(userHashMap)
             .addOnSuccessListener {
-                when(mActivity) {
-                    is UpdateProfileActivity -> {
-                        mActivity.updateUserSuccessConfirm()
+                when(mFragment) {
+                    is UpdateProfileFragment -> {
+                        mFragment.updateUserSuccessConfirm()
                     }
                 }
             }

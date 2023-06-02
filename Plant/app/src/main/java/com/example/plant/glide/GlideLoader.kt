@@ -5,7 +5,6 @@ import android.net.Uri
 import android.widget.ImageView
 import com.bumptech.glide.Glide
 import com.example.plant.R
-import kotlinx.android.synthetic.main.activity_profile.ivAvatarUser
 import java.io.IOException
 
 class GlideLoader(val mContext: Context) {

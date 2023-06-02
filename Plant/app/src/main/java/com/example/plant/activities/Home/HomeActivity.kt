@@ -1,37 +1,65 @@
 package com.example.plant.activities.Home
 
-import android.content.Context
+import android.app.Activity
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
+import android.net.Uri
 import android.os.Bundle
-import android.widget.Button
+import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import com.example.plant.R
-import com.example.plant.activities.Login.LoginActivity
-import com.example.plant.activities.Profile.ProfileActivity
-import kotlinx.android.synthetic.main.activity_home.btnLogout
-import kotlinx.android.synthetic.main.activity_home.btnProfile
+import com.example.plant.constant.constant
+import com.example.plant.fragment.HomeFragment
+import com.example.plant.fragment.ProfileFragment
+import com.example.plant.fragment.UpdateProfileFragment
+import com.example.plant.util.FragmentUtil
+import kotlinx.android.synthetic.main.activity_home.bottomNavBar
+
+//import kotlinx.android.synthetic.main.activity_home.btnLogout
+//import kotlinx.android.synthetic.main.activity_home.btnProfile
 
 class HomeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
         supportActionBar?.hide()
+        init()
         listenerEvent()
     }
+    fun init()
+    {
+        replaceFragment(HomeFragment())
+    }
     fun listenerEvent(){
-        btnLogout.setOnClickListener() {
-            val stillLoginPre = getSharedPreferences("stillLogin", Context.MODE_PRIVATE)
-            val editor = stillLoginPre.edit()
-            editor.putBoolean("isLoggedIn", false)
-            editor.apply()
-
-            val intent = Intent(this, LoginActivity::class.java)
-            startActivity(intent)
+        bottomNavBar.setOnItemSelectedListener { item ->
+            when(item.itemId){
+                R.id.home_action ->  {
+                    replaceFragment(HomeFragment())
+                    true
+                }
+                R.id.profile_action -> {
+                    replaceFragment(ProfileFragment())
+                    true
+                }
+                else -> false
+            }
         }
-
-        btnProfile.setOnClickListener() {
-            val intent = Intent(this,ProfileActivity::class.java)
-            startActivity(intent)
+    }
+    fun replaceFragment(mFragment : Fragment){
+        val transaction = supportFragmentManager.beginTransaction()
+        transaction.replace(R.id.HomeFrameLayout,mFragment)
+        transaction.commit()
+    }
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+       if (resultCode == Activity.RESULT_OK) {
+           if (requestCode == constant.PICK_IMAGE_REQUEST_CODE) {
+               val uri : Uri = data?.data!!
+               val updateProfileFragment = supportFragmentManager.findFragmentById(R.id.HomeFrameLayout)
+               if(updateProfileFragment is UpdateProfileFragment){
+                   updateProfileFragment?.setAvatarProfile(uri)
+               }
+           }
        }
     }
 }
