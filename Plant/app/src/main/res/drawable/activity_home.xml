@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.Home.HomeActivity">
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:orientation="horizontal"
+        tools:ignore="MissingConstraints">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/teal_200">
+
+            <TextView
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:text="Hello Taylor"
+                android:textSize="24dp"
+                android:textStyle="bold"
+                tools:ignore="MissingConstraints"
+                tools:layout_editor_absoluteX="39dp"
+                tools:layout_editor_absoluteY="35dp" />
+
+            <TextView
+                android:layout_width="160dp"
+                android:layout_height="wrap_content"
+                android:text="Let's Learn More Plants"
+                android:textStyle="italic"
+                tools:ignore="MissingConstraints"
+                tools:layout_editor_absoluteX="39dp"
+                tools:layout_editor_absoluteY="78dp" />
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                app:srcCompat="@drawable/ellipse"
+                tools:ignore="ContentDescription,MissingConstraints"
+                tools:layout_editor_absoluteX="265dp"
+                tools:layout_editor_absoluteY="26dp" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="480dp"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Button
+                android:id="@+id/addingg"
+                android:layout_width="110dp"
+                android:layout_height="wrap_content"
+                android:drawableTop="@drawable/vector_ek1"
+                android:text="ADDING NEW"
+                android:textSize="13dp"
+                tools:ignore="MissingConstraints"
+                tools:layout_editor_absoluteX="16dp"
+                tools:layout_editor_absoluteY="46dp" />
+
+            <Button
+                android:id="@+id/species"
+                android:layout_width="110dp"
+                android:layout_height="wrap_content"
+                android:drawableTop="@drawable/s"
+                android:text="SPECIES"
+                android:textSize="13dp"
+                tools:ignore="MissingConstraints"
+                tools:layout_editor_absoluteX="137dp"
+                tools:layout_editor_absoluteY="46dp" />
+
+            <Button
+                android:layout_width="110dp"
+                android:layout_height="wrap_content"
+                android:text="ARTICLES"
+                android:textSize="13dp"
+                tools:ignore="MissingConstraints"
+                tools:layout_editor_absoluteX="269dp"
+                tools:layout_editor_absoluteY="54dp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="180dp"
+                android:layout_height="80dp"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:layout_editor_absoluteX="16dp"
+                tools:layout_editor_absoluteY="160dp"
+                tools:ignore="MissingConstraints" />
+
+            <TextView
+                android:id="@+id/plant"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:text="Plant Type"
+                android:textSize="24dp"
+                android:textStyle="bold"
+                tools:layout_editor_absoluteX="16dp"
+                tools:layout_editor_absoluteY="120dp"
+                tools:ignore="MissingConstraints" />
+
+            <TextView
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:text="Photography"
+                android:textSize="24dp"
+                android:textStyle="bold"
+                tools:layout_editor_absoluteX="16dp"
+                tools:layout_editor_absoluteY="257dp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="80dp"
+                android:layout_height="120dp"
+                android:orientation="horizontal"
+                tools:ignore="MissingConstraints"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:layout_editor_absoluteX="32dp"
+                tools:layout_editor_absoluteY="310dp" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
+
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/searchView"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        tools:layout_editor_absoluteX="77dp"
+        tools:layout_editor_absoluteY="124dp"
+        tools:ignore="MissingConstraints"
+        android:background="@drawable/searrch"
+        />
+
+    <LinearLayout
+        android:layout_width="409dp"
+        android:layout_height="99dp"
+        android:orientation="horizontal"
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="631dp"
+        tools:ignore="MissingConstraints">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/union"
+            android:backgroundTint="@color/white">
+
+            <Button
+                android:id="@+id/home"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:drawableTop="@drawable/home"
+                android:text="home"
+                android:background="@drawable/buttonhome"
+                android:textColor="@color/btn_color"
+                tools:layout_editor_absoluteX="32dp"
+                tools:layout_editor_absoluteY="34dp" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/floatingActionButton2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                app:srcCompat="@android:drawable/ic_input_add"
+                tools:layout_editor_absoluteX="176dp"
+                tools:layout_editor_absoluteY="0dp" />
+
+            <Button
+                android:id="@+id/profile"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:background="@drawable/buttonhome"
+                android:text="profile"
+                tools:layout_editor_absoluteX="296dp"
+                tools:layout_editor_absoluteY="16dp" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
