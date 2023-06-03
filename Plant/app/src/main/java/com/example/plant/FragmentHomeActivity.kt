@@ -24,6 +24,8 @@ class FragmentHomeActivity : AppCompatActivity() {
     }
 
     private fun fetchData() {
+
+        //Lấy dữ liệu của collection plant và plantType đưa vào rvPlant
         //tham chiếu collection plantType
         val plantTypeCollection = FirebaseFirestore.getInstance().collection("plantType")
         //tham chiếu collection plant
@@ -31,7 +33,7 @@ class FragmentHomeActivity : AppCompatActivity() {
 
         plantTypeCollection.get()
             .addOnSuccessListener { plantTypeDocuments ->
-                val plantTypes = plantTypeDocuments.toObjects(PlantTypeModel::class.java)
+                val plantTypes = plantTypeDocuments.toObjects(PlantTypeHomeModel::class.java)
                 for (plantType in plantTypes) {
                     //tìm type của plant trùng với type của plantType
                     plantCollection.whereEqualTo("plantType", plantType.name)
@@ -45,7 +47,21 @@ class FragmentHomeActivity : AppCompatActivity() {
                         }
                 }
 
-                binding.rvPlant.adapter = PlantTypeAdapter(this, plantTypes)
+                binding.rvPlant.adapter = PlantTypeHomeAdapter(this, plantTypes)
+            }
+            .addOnFailureListener { exception ->
+                // Xử lý khi truy vấn thất bại
+            }
+
+
+        // Lấy dữ liệu của collection photography đưa vào RecyclerView rvPhotography
+        FirebaseFirestore.getInstance().collection("photography")
+            .get()
+            .addOnSuccessListener { photoDocuments ->
+                for(document in photoDocuments) {
+                    val photography = photoDocuments.toObjects(PhotographyHomeModel::class.java)
+                    binding.rvPhotography.adapter = PhotographyHomeAdapter(this, photography)
+                }
             }
             .addOnFailureListener { exception ->
                 // Xử lý khi truy vấn thất bại

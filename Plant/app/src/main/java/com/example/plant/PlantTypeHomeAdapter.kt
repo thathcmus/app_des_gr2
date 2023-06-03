@@ -9,12 +9,12 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 
-class PlantTypeAdapter(val context: Context, private val plantType: List<PlantTypeModel>):RecyclerView.Adapter<PlantTypeViewHolder>() {
+class PlantTypeHomeAdapter(val context: Context, private val plantType: List<PlantTypeHomeModel>):RecyclerView.Adapter<PlantTypeViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlantTypeViewHolder {
         return PlantTypeViewHolder(
             LayoutInflater.from(parent.context)
-                .inflate(R.layout.item_layout, parent, false)
+                .inflate(R.layout.item_layout_home_plant_type, parent, false)
         )
     }
 
@@ -25,17 +25,16 @@ class PlantTypeAdapter(val context: Context, private val plantType: List<PlantTy
     override fun onBindViewHolder(holder: PlantTypeViewHolder, position: Int) {
         val plant = plantType[position]
         holder.plantName.text = plant.name
-        holder.numberOfPlant.text = plant.count.toString()
+        holder.numberOfPlant.text = "${plant.count} Types of Plants"
 
         Glide.with(context)
             .load(plant.image)
-            .into(holder.pic)
+            .into(holder.image)
     }
-
 }
 
 class PlantTypeViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
     val plantName: TextView = itemView.findViewById(R.id.tvPlantTypeName)
-    val pic: ImageView = itemView.findViewById(R.id.ivPlant)
+    val image: ImageView = itemView.findViewById(R.id.ivPlant)
     val numberOfPlant: TextView = itemView.findViewById(R.id.tvNumberOfType)
 }

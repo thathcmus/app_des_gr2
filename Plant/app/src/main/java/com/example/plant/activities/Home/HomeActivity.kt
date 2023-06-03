@@ -7,7 +7,6 @@ import android.os.Bundle
 import android.widget.Button
 import com.example.plant.FragmentHomeActivity
 import com.example.plant.R
-import com.example.plant.TestRvPlantType
 import com.example.plant.activities.Login.LoginActivity
 
 class HomeActivity : AppCompatActivity() {
@@ -29,11 +28,6 @@ class HomeActivity : AppCompatActivity() {
             startActivity(intent)
             finish()
         }
-
-        var showallPlantTypeBtn = findViewById<Button>(R.id.btnShowAllPlantType)
-            .setOnClickListener {
-                startActivity(Intent(this, TestRvPlantType::class.java))
-            }
 
         var homeFragment = findViewById<Button>(R.id.btnHomeFragment)
             .setOnClickListener {

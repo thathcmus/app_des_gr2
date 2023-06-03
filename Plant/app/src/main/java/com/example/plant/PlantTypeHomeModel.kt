@@ -1,8 +1,8 @@
 package com.example.plant
 
-data class PlantTypeModel(
-    val name: String,
-    val image: String,
+data class PlantTypeHomeModel(
+    val name: String,   // Tên loại cây
+    val image: String,  // URL của ảnh trong Storage
     var count: Int,     // Đếm số lượng cây cùng loại
 ) {
     constructor():this(

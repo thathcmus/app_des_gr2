@@ -16,9 +16,6 @@
             android:name=".FragmentHomeActivity"
             android:exported="false"/>
         <activity
-            android:name=".TestRvPlantType"
-            android:exported="false" />
-        <activity
             android:name=".activities.Profile.ProfileActivity"
             android:exported="false" />
         <activity
