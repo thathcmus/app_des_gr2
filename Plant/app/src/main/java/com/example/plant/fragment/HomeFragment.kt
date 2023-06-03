@@ -25,14 +25,5 @@ class HomeFragment : Fragment() {
     }
 
     private fun listenEvent() {
-            binding.btnLogout.setOnClickListener() {
-            val stillLoginPre = this.activity?.getSharedPreferences("stillLogin", Context.MODE_PRIVATE)
-            val editor = stillLoginPre?.edit()
-            editor?.putBoolean("isLoggedIn", false)
-            editor?.apply()
-
-            val intent = Intent(activity, LoginActivity::class.java)
-            startActivity(intent)
-        }
     }
 }

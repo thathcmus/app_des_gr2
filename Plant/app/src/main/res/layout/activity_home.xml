@@ -6,49 +6,53 @@
     android:layout_height="match_parent"
     tools:context=".activities.Home.HomeActivity">
 
-<FrameLayout
-    android:id="@+id/HomeFrameLayout"
-    android:layout_width="match_parent"
-    android:layout_height="0dp"
-    app:layout_constraintTop_toTopOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintBottom_toTopOf="@+id/bottomNavBar"
-    />
-    <View
+    <FrameLayout
+        android:id="@+id/HomeFrameLayout"
         android:layout_width="match_parent"
-        android:layout_height="4dp"
-        app:layout_constraintBottom_toTopOf="@+id/bottomNavBar"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="@+id/bottomNav"
         app:layout_constraintEnd_toEndOf="parent"
-        android:background="@drawable/shadow"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginBottom="64dp"
         />
-<com.google.android.material.bottomnavigation.BottomNavigationView
-    android:id="@+id/bottomNavBar"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    app:menu="@menu/bottom_nav_menu"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:backgroundTint="@color/white"
-    app:itemTextColor="@color/bottom_nav_bar_color"
-    app:itemIconTint="@color/bottom_nav_bar_color"
-    android:paddingRight="20dp"
-    android:paddingLeft="20dp"
-    />
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/bottomNav"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:ignore="MissingConstraints"
-        android:src="@drawable/adding_icon"
-        android:backgroundTint="#61A5E4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="30dp"
-        app:elevation="10dp"
-        />
-
-
+        android:background="@drawable/bottom_nav_background"
+        >
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottomNavBar"
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            app:menu="@menu/bottom_nav_menu"
+            app:backgroundTint="@color/white"
+            app:itemTextColor="@color/bottom_nav_bar_color"
+            app:itemIconTint="@color/bottom_nav_bar_color"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:paddingRight="20dp"
+            android:paddingLeft="20dp"
+            app:elevation="0dp"
+            />
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:ignore="MissingConstraints"
+            android:src="@drawable/adding_icon"
+            android:backgroundTint="#61A5E4"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp"
+            app:elevation="10dp"
+            />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
