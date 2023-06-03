@@ -12,4 +12,22 @@
     <color name="btn_color">#2DDA93</color>
     <color name="logo_color">#3FC845</color>
     <color name="loading_color">#24A570</color>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+    <color name="_bg__profile_ek2_color">#FBFDFF</color>
+    <color name="rectangle_2_color">#48A2F4</color>
+    <color name="species_color">#FFFFFF</color>
+    <color name="articles_color">#C5C5C5</color>
+    <color name="_02___01___2019_color">#A1A8B9</color>
+    <color name="alagatre_plant_color">#364459</color>
+    <color name="rectangle_2_1_color">#E3E3E3</color>
+    <color name="profile_ek3_color">#2CD992</color>
+    <color name="home_color">#D2D2D2</color>
+    <color name="background_gradient_start">#000000</color>
+    <color name="background_gradient_end">#DDDDDD</color>
+    <color name="fastlane_background">#0096a6</color>
+    <color name="search_opaque">#ffaa3f</color>
+    <color name="selected_background">#ffaa3f</color>
+    <color name="default_background">#3d3d3d</color>
 </resources>

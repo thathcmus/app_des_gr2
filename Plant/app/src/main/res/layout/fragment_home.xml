@@ -25,24 +25,29 @@
                 android:backgroundTint="@color/white">
 
                 <Button
-                    android:id="@+id/home"
+                    android:id="@+id/btnhHome"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     android:background="@drawable/buttonhome"
                     android:drawableTop="@drawable/homex"
                     android:text="home"
                     android:textColor="@color/btn_color"
-                    tools:layout_editor_absoluteX="32dp"
-                    tools:layout_editor_absoluteY="34dp" />
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.077"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.871" />
 
                 <com.google.android.material.floatingactionbutton.FloatingActionButton
                     android:id="@+id/floatingActionButton2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:clickable="true"
-                    app:srcCompat="@android:drawable/ic_input_add"
-                    tools:layout_editor_absoluteX="176dp"
-                    tools:layout_editor_absoluteY="0dp" />
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@android:drawable/ic_input_add" />
 
                 <Button
                     android:id="@+id/profile"
@@ -51,8 +56,12 @@
                     android:background="@drawable/buttonhome"
                     android:drawableTop="@drawable/pro"
                     android:text="profile"
-                    tools:layout_editor_absoluteX="304dp"
-                    tools:layout_editor_absoluteY="34dp" />
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.914"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.871" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </LinearLayout>
@@ -75,9 +84,13 @@
                     android:drawableTop="@drawable/camera"
                     android:text="ADDING NEW"
                     android:textSize="13dp"
-                    tools:ignore="MissingConstraints"
-                    tools:layout_editor_absoluteX="16dp"
-                    tools:layout_editor_absoluteY="36dp" />
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.053"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.09"
+                    tools:ignore="MissingConstraints" />
 
                 <Button
                     android:id="@+id/species"
@@ -86,28 +99,41 @@
                     android:drawableTop="@drawable/s"
                     android:text="SPECIES"
                     android:textSize="13dp"
-                    tools:ignore="MissingConstraints"
-                    tools:layout_editor_absoluteX="150dp"
-                    tools:layout_editor_absoluteY="36dp" />
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.498"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.089"
+                    tools:ignore="MissingConstraints" />
 
                 <Button
+                    android:id="@+id/button4"
                     android:layout_width="110dp"
                     android:layout_height="wrap_content"
                     android:drawableTop="@drawable/atr"
                     android:text="ARTICLES"
                     android:textSize="13dp"
-                    tools:ignore="MissingConstraints"
-                    tools:layout_editor_absoluteX="285dp"
-                    tools:layout_editor_absoluteY="36dp" />
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.946"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.085"
+                    tools:ignore="MissingConstraints" />
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:layout_width="180dp"
-                    android:layout_height="80dp"
+                    android:id="@+id/rvPlant"
+                    android:layout_width="381dp"
+                    android:layout_height="159dp"
                     android:orientation="horizontal"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    tools:ignore="MissingConstraints"
-                    tools:layout_editor_absoluteX="16dp"
-                    tools:layout_editor_absoluteY="160dp" >
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/plant"
+                    app:layout_constraintVertical_bias="0.0"
+                    tools:ignore="MissingConstraints">
 
                 </androidx.recyclerview.widget.RecyclerView>
 
@@ -118,28 +144,42 @@
                     android:text="Plant Type"
                     android:textSize="24dp"
                     android:textStyle="bold"
-                    tools:ignore="MissingConstraints"
-                    tools:layout_editor_absoluteX="16dp"
-                    tools:layout_editor_absoluteY="120dp" />
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.061"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.258"
+                    tools:ignore="MissingConstraints" />
 
                 <TextView
+                    android:id="@+id/textView2"
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:text="Photography"
                     android:textSize="24dp"
                     android:textStyle="bold"
-                    tools:ignore="MissingConstraints"
-                    tools:layout_editor_absoluteX="16dp"
-                    tools:layout_editor_absoluteY="257dp" />
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.061"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.698"
+                    tools:ignore="MissingConstraints" />
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:layout_width="80dp"
-                    android:layout_height="120dp"
+                    android:id="@+id/recyclerView"
+                    android:layout_width="112dp"
+                    android:layout_height="85dp"
                     android:orientation="horizontal"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    tools:ignore="MissingConstraints"
-                    tools:layout_editor_absoluteX="32dp"
-                    tools:layout_editor_absoluteY="310dp" />
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.048"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.908"
+                    tools:ignore="MissingConstraints" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
@@ -156,33 +196,54 @@
                 android:layout_height="match_parent"
                 android:background="@color/teal_200">
 
+                <Button
+                    android:id="@+id/btnLogout"
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/teal_200"
+                    android:text="logout"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    tools:layout_editor_absoluteY="1dp" />
+
                 <TextView
+                    android:id="@+id/textView"
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:text="Hello Taylor"
                     android:textSize="24dp"
                     android:textStyle="bold"
-                    tools:ignore="MissingConstraints"
-                    tools:layout_editor_absoluteX="39dp"
-                    tools:layout_editor_absoluteY="35dp" />
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.149"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.288"
+                    tools:ignore="MissingConstraints" />
 
                 <TextView
                     android:layout_width="160dp"
                     android:layout_height="wrap_content"
                     android:text="Let's Learn More Plants"
                     android:textStyle="italic"
-                    tools:ignore="MissingConstraints"
-                    tools:layout_editor_absoluteX="39dp"
-                    tools:layout_editor_absoluteY="78dp" />
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.115"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView"
+                    app:layout_constraintVertical_bias="0.169"
+                    tools:ignore="MissingConstraints" />
 
                 <ImageView
                     android:id="@+id/imageView"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.709"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
                     app:srcCompat="@drawable/ellipse"
-                    tools:ignore="ContentDescription,MissingConstraints"
-                    tools:layout_editor_absoluteX="265dp"
-                    tools:layout_editor_absoluteY="26dp" />
+                    tools:ignore="ContentDescription,MissingConstraints" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
