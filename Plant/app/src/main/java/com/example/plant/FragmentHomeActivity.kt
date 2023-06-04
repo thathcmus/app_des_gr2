@@ -20,11 +20,14 @@ class FragmentHomeActivity : AppCompatActivity() {
             layoutManager = LinearLayoutManager(this@FragmentHomeActivity, LinearLayoutManager.HORIZONTAL, false)
         }
 
+        binding.rvPhotography.apply{
+            layoutManager = LinearLayoutManager(this@FragmentHomeActivity, LinearLayoutManager.HORIZONTAL, false)
+        }
+
         fetchData()
     }
 
     private fun fetchData() {
-
         //Lấy dữ liệu của collection plant và plantType đưa vào rvPlant
         //tham chiếu collection plantType
         val plantTypeCollection = FirebaseFirestore.getInstance().collection("plantType")
@@ -35,7 +38,7 @@ class FragmentHomeActivity : AppCompatActivity() {
             .addOnSuccessListener { plantTypeDocuments ->
                 val plantTypes = plantTypeDocuments.toObjects(PlantTypeHomeModel::class.java)
                 for (plantType in plantTypes) {
-                    //tìm type của plant trùng với type của plantType
+                    //tìm plantType của plant trùng giá trị với type của plantType
                     plantCollection.whereEqualTo("plantType", plantType.name)
                         .get()
                         .addOnSuccessListener { plantDocuments ->
