@@ -30,7 +30,7 @@ class ProfileFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         binding = FragmentProfileBinding.inflate(layoutInflater)
-        this.activity?.let { Firestore().getUserDetail(it, this) }
+        Firestore().getUserDetail( this)
         listenerEvent()
         return binding.root
     }

@@ -6,6 +6,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.plant.activities.RegisterAccount.RegisterActivity
 import com.example.plant.constant.constant
+import com.example.plant.fragment.HomeFragment
 import com.example.plant.fragment.ProfileFragment
 import com.example.plant.fragment.UpdateProfileFragment
 import com.example.plant.model.User
@@ -32,9 +33,7 @@ class Firestore {
         return Firebase.auth.currentUser
     }
 
-    fun getUserDetail(mActivity: Activity,mFragment: Fragment) {
-        val loadingDialog = ProgressBarLoading(mActivity)
-        loadingDialog.startLoading()
+    fun getUserDetail(mFragment: Fragment) {
         mFireStore.collection(constant.USER_COLLECTION).document(getCurrentUserAuth()!!.uid)
             .get()
             .addOnSuccessListener { document ->
@@ -45,14 +44,16 @@ class Firestore {
                             mFragment.setCurrentUser(currentUser)
                             mFragment.ShowUIInfo(currentUser)
                         }
+                        is HomeFragment -> {
+                            mFragment.setCurrentUser(currentUser)
+                            mFragment.ShowUIInfo(currentUser)
+                        }
                     }
-                    loadingDialog.hideLoading()
                 } else {
                     Log.e("get database", "No such document")
                 }
             }
             .addOnFailureListener { exception ->
-                loadingDialog.hideLoading()
                 Log.e("get database", "get userDetail failed", exception)
             }
     }

@@ -234,6 +234,6 @@ class UpdateProfileFragment : Fragment(),View.OnClickListener {
     }
     fun updateUserSuccessConfirm() {
         Toast.makeText(this@UpdateProfileFragment.activity, "Update User Infomation successed!", Toast.LENGTH_SHORT).show()
-        FragmentUtil(activity).replaceFragment(ProfileFragment(), R.id.HomeFrameLayout)
+        FragmentUtil(activity).replaceFragment(HomeFragment(), R.id.HomeFrameLayout)
     }
 }
