@@ -48,7 +48,7 @@ class PhotographyAdaper (var photographyList: List<Photography>, val context: Co
     }
 
     override fun onBindViewHolder(holder: PhotographyViewHolder, position: Int) {
-        GlideLoader(context).loadUserPictureFromUrl(photographyList[position].picture,holder.itemView.tvPhotographyItem)
+        GlideLoader(context).loadUserPictureFromUrl(photographyList[position].picture,holder.itemView.tvPhotographyItem,R.drawable.placeholderloading)
         holder.itemView.apply {
             tvThumbnail.text = photographyList[position].thumbnail
         }

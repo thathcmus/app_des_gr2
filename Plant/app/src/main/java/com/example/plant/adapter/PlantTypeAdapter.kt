@@ -53,7 +53,7 @@ class PlantTypeAdapter (var plantTypeList: List<PlantType>, val context: Context
 
     override fun onBindViewHolder(holder: PlantTypeViewHolder, position: Int) {
         holder.itemView.apply {
-            GlideLoader(context).loadUserPictureFromUrl(plantTypeList[position].image,holder.itemView.ivPlantType)
+            GlideLoader(context).loadUserPictureFromUrl(plantTypeList[position].image,holder.itemView.ivPlantType, R.drawable.placeholderloading)
             tvTypeName.text = plantTypeList[position].name
             tvTypeQuantity.text = plantTypeList[position].count.toString()
         }

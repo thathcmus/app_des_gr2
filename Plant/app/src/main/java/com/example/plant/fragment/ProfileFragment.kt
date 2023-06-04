@@ -38,7 +38,7 @@ class ProfileFragment : Fragment() {
         this.currentUser = currentUser
     }
     fun ShowUIInfo(UserInfo : User){
-        this.activity?.let { GlideLoader(it).loadUserPictureFromUrl(UserInfo.avatar,ivAvatarUser) }
+        this.activity?.let { GlideLoader(it).loadUserPictureFromUrl(UserInfo.avatar,ivAvatarUser, R.drawable.placeholder) }
         tvNameUser.text = UserInfo?.fullName
         tvLocationUser.text = UserInfo?.location
         if (UserInfo?.location != "") {

@@ -106,7 +106,7 @@ class HomeFragment : Fragment() {
     }
 
     fun ShowUIInfo(UserInfo : User){
-        this.activity?.let { GlideLoader(it).loadUserPictureFromUrl(UserInfo.avatar,ivAvatar) }
+        this.activity?.let { GlideLoader(it).loadUserPictureFromUrl(UserInfo.avatar,ivAvatar, R.drawable.placeholder) }
         tvNameUserHome.text = UserInfo?.fullName
     }
 }

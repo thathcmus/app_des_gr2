@@ -52,7 +52,7 @@ class UpdateProfileFragment : Fragment(),View.OnClickListener {
         val bundle = this.arguments
         if (bundle != null) {
             currentUser = bundle?.let { User::class.getParcelable(it, constant.USER_DETAIL) }!!
-            this.activity?.let { GlideLoader(it).loadUserPictureFromUrl(currentUser.avatar, binding.ivUpdateUserAvatar) }
+            this.activity?.let { GlideLoader(it).loadUserPictureFromUrl(currentUser.avatar, binding.ivUpdateUserAvatar,R.drawable.placeholder) }
             binding.etUpdateName.setText(currentUser?.fullName)
             binding.etUpdateEmail.setText(currentUser?.email)
             binding.etUpdateEmail.isEnabled = false

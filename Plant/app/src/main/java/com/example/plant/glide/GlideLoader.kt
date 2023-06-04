@@ -20,11 +20,11 @@ class GlideLoader(val mContext: Context) {
             e.printStackTrace()
         }
     }
-    fun loadUserPictureFromUrl (url: String, imageView: ImageView){
+    fun loadUserPictureFromUrl (url: String, imageView: ImageView, placeholderImage: Int){
         Glide.with(mContext)
             .load(url) // image url
-            .placeholder(R.drawable.placeholder)
-            .error(R.drawable.placeholder)
+            .placeholder(placeholderImage)
+            .error(placeholderImage)
             .centerCrop()
             .into(imageView)
     }
