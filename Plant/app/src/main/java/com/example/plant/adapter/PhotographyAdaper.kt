@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.plant.R
 import com.example.plant.databinding.PhotographyItemBinding
+import com.example.plant.glide.GlideLoader
 import com.example.plant.model.Photography
 import com.tanphandev.recyclerview.`interface`.ItemClickListener
 import kotlinx.android.synthetic.main.photography_item.view.tvPhotographyItem
@@ -47,8 +48,8 @@ class PhotographyAdaper (var photographyList: List<Photography>, val context: Co
     }
 
     override fun onBindViewHolder(holder: PhotographyViewHolder, position: Int) {
+        GlideLoader(context).loadUserPictureFromUrl(photographyList[position].picture,holder.itemView.tvPhotographyItem)
         holder.itemView.apply {
-            tvPhotographyItem.setImageResource(photographyList[position].image)
             tvThumbnail.text = photographyList[position].thumbnail
         }
         holder.setItemClickListener(object : ItemClickListener {

@@ -1,4 +1,5 @@
 package com.example.plant.model
 
-data class PlantType(var image: Int = 0, var name: String = "") {
+data class PlantType(var image: String = "", var name: String = "",var count: Int = 0) {
+
 }

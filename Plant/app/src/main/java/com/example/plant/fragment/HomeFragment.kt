@@ -19,6 +19,7 @@ import com.example.plant.model.Photography
 import com.example.plant.model.PlantType
 import com.example.plant.model.User
 import com.example.plant.util.FragmentUtil
+import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.fragment_home.ivAvatar
 import kotlinx.android.synthetic.main.fragment_home.tvNameUserHome
 
@@ -36,52 +37,69 @@ class HomeFragment : Fragment() {
         binding = FragmentHomeBinding.inflate(layoutInflater)
         //get data
         getData()
-        showUI()
         listenEvent()
         return binding.root
-    }
-    fun showUI() {
-
-        //show into photograply recylceview
-        binding.rcPhotography.adapter = this.activity?.let {
-            PhotographyAdaper(photographyList,
-                it
-            )
-        }
-        binding.rcPhotography.layoutManager = LinearLayoutManager(this.requireContext(), LinearLayoutManager.HORIZONTAL, false)
-        binding.rcPhotography.setHasFixedSize(true)
-        //show into plant type recylceview
-        binding.rcPlantTypes.adapter = this.activity?.let{
-            PlantTypeAdapter(plantTypeList,
-            it
-            )
-        }
-        binding.rcPlantTypes.layoutManager = LinearLayoutManager(this.requireContext(), LinearLayoutManager.HORIZONTAL, false)
-        binding.rcPlantTypes.setHasFixedSize(true)
-
     }
     private fun getData() {
         //get user info
         Firestore().getUserDetail(this)
-
-
         ///get photography list
-        photographyList.add(Photography(R.drawable.photography_item, "#mini"))
-        photographyList.add(Photography(R.drawable.photography_item2, "#cute"))
-        photographyList.add(Photography(R.drawable.photography_item3, "#small"))
-        photographyList.add(Photography(R.drawable.photography_item4, "#danger"))
-        ///get plant type list
-        plantTypeList.add(PlantType(R.drawable.home_plants,"Home Plants"))
-        plantTypeList.add(PlantType(R.drawable.huge_plants,"Huge Plants"))
-        plantTypeList.add(PlantType(R.drawable.climbing_plants,"Climbing Plants"))
-        plantTypeList.add(PlantType(R.drawable.outdoor_plants,"Outdoor Plants"))
+        FirebaseFirestore.getInstance().collection("photography")
+                .get()
+                .addOnSuccessListener { photoDocuments ->
+                    photographyList  = photoDocuments.toObjects(Photography::class.java)
+                    //show into recycleview
+                    binding.rcPhotography.adapter = this.activity?.let {
+                        PhotographyAdaper(photographyList,
+                                it
+                        )
+                    }
+                    binding.rcPhotography.layoutManager = LinearLayoutManager(this.requireContext(), LinearLayoutManager.HORIZONTAL, false)
+                    binding.rcPhotography.setHasFixedSize(true)
+
+                }
+                .addOnFailureListener { exception ->
+                }
+
+        //get plant type list
+        //get an Instance
+        val plantTypeCollection = FirebaseFirestore.getInstance().collection("plantType")
+        val plantCollection = FirebaseFirestore.getInstance().collection("plant")
+
+        plantTypeCollection.get()
+                .addOnSuccessListener { plantTypeDocuments ->
+                    plantTypeList = plantTypeDocuments.toObjects(PlantType::class.java)
+                    for (plantType in plantTypeList) {
+                        //find plants match name field of plantType document
+                        plantCollection.whereEqualTo("plantType", plantType.name)
+                                .get()
+                                .addOnSuccessListener { plantDocuments ->
+                                    plantType.count = plantDocuments.size()
+                                    binding.rcPlantTypes.adapter?.notifyDataSetChanged()
+                                }
+                                .addOnFailureListener { exception ->
+                                    // Xử lý khi truy vấn thất bại
+                                }
+                    }
+                    binding.rcPlantTypes.adapter = this.activity?.let {
+                        PlantTypeAdapter(plantTypeList,
+                                it
+                        )
+                    }
+                    binding.rcPhotography.layoutManager = LinearLayoutManager(this.requireContext(), LinearLayoutManager.HORIZONTAL, false)
+                    binding.rcPhotography.setHasFixedSize(true)
+
+                }
+                .addOnFailureListener { exception ->
+                    // Xử lý khi truy vấn thất bại
+                }
+
 
     }
     private fun listenEvent() {
         binding.ivAvatar.setOnClickListener() {
             FragmentUtil(this.activity).replaceFragment(ProfileFragment(),R.id.HomeFrameLayout,false)
         }
-
     }
     fun setCurrentUser(currentUser: User){
         this.currentUser = currentUser

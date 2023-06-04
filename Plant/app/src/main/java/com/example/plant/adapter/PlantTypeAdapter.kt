@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.plant.R
 import com.example.plant.databinding.PhotographyItemBinding
 import com.example.plant.databinding.PlantTypeItemBinding
+import com.example.plant.glide.GlideLoader
 import com.example.plant.model.Photography
 import com.example.plant.model.PlantType
 import com.tanphandev.recyclerview.`interface`.ItemClickListener
@@ -16,6 +17,7 @@ import kotlinx.android.synthetic.main.photography_item.view.tvPhotographyItem
 import kotlinx.android.synthetic.main.photography_item.view.tvThumbnail
 import kotlinx.android.synthetic.main.plant_type_item.view.ivPlantType
 import kotlinx.android.synthetic.main.plant_type_item.view.tvTypeName
+import kotlinx.android.synthetic.main.plant_type_item.view.tvTypeQuantity
 
 class PlantTypeAdapter (var plantTypeList: List<PlantType>, val context: Context) : RecyclerView.Adapter<PlantTypeAdapter.PlantTypeViewHolder>() {
     private lateinit var binding: PlantTypeItemBinding
@@ -51,8 +53,9 @@ class PlantTypeAdapter (var plantTypeList: List<PlantType>, val context: Context
 
     override fun onBindViewHolder(holder: PlantTypeViewHolder, position: Int) {
         holder.itemView.apply {
-            ivPlantType.setImageResource(plantTypeList[position].image)
+            GlideLoader(context).loadUserPictureFromUrl(plantTypeList[position].image,holder.itemView.ivPlantType)
             tvTypeName.text = plantTypeList[position].name
+            tvTypeQuantity.text = plantTypeList[position].count.toString()
         }
         holder.setItemClickListener(object : ItemClickListener {
             override fun onClick(view: View, position: Int, isLongClick: Boolean) {
