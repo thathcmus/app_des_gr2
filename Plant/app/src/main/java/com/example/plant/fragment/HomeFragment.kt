@@ -1,9 +1,6 @@
 package com.example.plant.fragment
 
-import android.content.Context
-import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -99,6 +96,9 @@ class HomeFragment : Fragment() {
     private fun listenEvent() {
         binding.ivAvatar.setOnClickListener() {
             FragmentUtil(this.activity).replaceFragment(ProfileFragment(),R.id.HomeFrameLayout,false)
+        }
+        binding.articlesBtn.setOnClickListener() {
+            FragmentUtil(this.activity).replaceFragment(ArticlesFragment(),R.id.HomeFrameLayout,false)
         }
     }
     fun setCurrentUser(currentUser: User){
