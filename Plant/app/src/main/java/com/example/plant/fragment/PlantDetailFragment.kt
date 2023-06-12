@@ -1,0 +1,55 @@
+package com.example.plant.fragment
+
+import android.os.Build
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import com.example.plant.R
+import com.example.plant.constant.constant
+import com.example.plant.databinding.FragmentPlantDetailBinding
+import com.example.plant.glide.GlideLoader
+import com.example.plant.model.Plant
+import com.example.plant.util.FragmentUtil
+import kotlin.reflect.KClass
+
+class PlantDetailFragment : Fragment() {
+    private lateinit var binding: FragmentPlantDetailBinding
+    private var plantDetail = Plant()
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        binding = FragmentPlantDetailBinding.inflate(layoutInflater)
+        //get data
+        getPlantDetail()
+        listenEvent()
+        return binding.root
+    }
+    private fun getPlantDetail() {
+        val bundle = this.arguments
+        if (bundle != null) {
+            plantDetail = bundle?.let { Plant::class.getParcelable(it, constant.PLANT) }!!
+            GlideLoader(this.requireContext()).loadUserPictureFromUrl(plantDetail.image,binding.ivPlantDetail, R.drawable.placeholderloading)
+            binding.namePlant.text = plantDetail.name
+            binding.kingdomPlant.text = plantDetail.kingdom
+            binding.familyPlant.text = plantDetail.family
+            binding.plantContent.text = plantDetail.content
+        }
+    }
+
+    inline fun <reified T : Any> KClass<T>.getParcelable(bundle: Bundle, key: String): T? =
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU)
+            bundle.getParcelable(key, T::class.java)
+        else
+            bundle.getParcelable(key)
+
+    fun listenEvent() {
+        binding.ivBackPlantDetail.setOnClickListener() {
+            FragmentUtil(this.activity).replaceFragment(PlantFragment(),
+                R.id.HomeFrameLayout,false)
+        }
+    }
+
+}

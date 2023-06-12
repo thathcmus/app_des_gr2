@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginEnd="20dp">
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/cvPlant"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:layout_gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <ImageView
+            android:id="@+id/ivPlant"
+            android:layout_width="wrap_content"
+            android:layout_height="130dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/home_plants" />
+
+    </android.support.v7.widget.CardView>
+
+    <TextView
+        android:id="@+id/tvPlantName"
+        android:layout_width="wrap_content"
+        android:layout_height="21dp"
+        android:layout_marginStart="140dp"
+        android:layout_marginBottom="108dp"
+        android:text="Name"
+        android:textColor="#36455a"
+        android:textSize="17sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="200dp"
+        android:layout_marginTop="60dp"
+        android:elevation="3dp"
+        android:orientation="horizontal"
+        android:paddingStart="18dp"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvPlantName" />
+
+    <TextView
+        android:layout_width="59dp"
+        android:layout_height="15dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:text="KINGDOM"
+        android:textColor="#a1a8b9"
+        android:textSize="12dp"
+        tools:layout_editor_absoluteX="139dp"
+        tools:layout_editor_absoluteY="30dp" />
+
+    <TextView
+        android:id="@+id/tvPlantKingdom"
+        android:layout_width="wrap_content"
+        android:layout_height="17dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:text="kingdom_plant"
+        android:textColor="#495566"
+        android:textSize="12dp"
+        app:layout_constraintStart_toStartOf="@+id/textView2"
+        tools:layout_editor_absoluteY="52dp" />
+
+    <TextView
+        android:id="@+id/tvPlantFamily"
+        android:layout_width="wrap_content"
+        android:layout_height="15dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:text="family_plant"
+        android:textColor="#495566"
+        android:textSize="12dp"
+        tools:layout_editor_absoluteX="276dp"
+        tools:layout_editor_absoluteY="52dp" />
+
+    <TextView
+        android:layout_width="59dp"
+        android:layout_height="15dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:text="FAMILY"
+        android:textColor="#a1a8b9"
+        android:textSize="12dp"
+        app:layout_constraintStart_toStartOf="@+id/tvPlantFamily"
+        tools:layout_editor_absoluteY="30dp" />
+
+    <TextView
+        android:id="@+id/tvPlantDescription"
+        android:layout_width="223dp"
+        android:layout_height="34dp"
+        android:text="descrip_lant"
+        android:textColor="#495566"
+        android:textSize="12dp"
+        tools:layout_editor_absoluteX="139dp"
+        tools:layout_editor_absoluteY="96dp" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="83dp"
+        android:layout_height="15dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:text="DESCRIPTION"
+        android:textColor="#a1a8b9"
+        android:textSize="12dp"
+        app:layout_constraintStart_toStartOf="@+id/tvPlantDescription"
+        tools:layout_editor_absoluteY="74dp" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
