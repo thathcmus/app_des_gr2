@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.plant.NavigationTestActivity
 import com.example.plant.R
 import com.example.plant.adapter.PhotographyAdaper
 import com.example.plant.adapter.PlantTypeAdapter
@@ -40,6 +41,15 @@ class HomeFragment : Fragment() {
         listenEvent()
         return binding.root
     }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.addingBtn.setOnClickListener {
+            startActivity(Intent(requireContext(), NavigationTestActivity::class.java))
+        }
+    }
+
     private fun getData() {
         //get user info
         Firestore().getUserDetail(this)
