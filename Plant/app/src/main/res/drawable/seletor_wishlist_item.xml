@@ -4,11 +4,7 @@
         android:drawable="@drawable/ic_heart_outlined"
         android:state_checked="false"/>
 
-
     <item
         android:drawable="@drawable/ic_heart_filled"
         android:state_checked="true"/>
-
-    <item
-        android:drawable="@drawable/ic_heart_outlined"/>
 </selector>
