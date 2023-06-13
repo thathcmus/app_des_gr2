@@ -1,6 +1,5 @@
 package com.example.plant.adapter
 
-import android.support.annotation.NonNull
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -10,10 +9,6 @@ import com.example.plant.R
 import com.example.plant.firestore.Firestore
 import com.example.plant.glide.GlideLoader
 import com.example.plant.model.Article
-import com.google.android.gms.tasks.OnCompleteListener
-import com.google.android.gms.tasks.Task
-import com.google.firebase.firestore.Query
-import com.google.firebase.firestore.QuerySnapshot
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.articles_item.view.ivArticles
@@ -44,6 +39,7 @@ class ArticleRecyclerAdapter(val articleList: ArrayList<Article>, val listener: 
                 listener.onClick(position)
 
             }
+            //click liked btn
             itemView.likeBtn.setOnClickListener {
                 val position = adapterPosition
                 val postKey : String = articleList[position].id
@@ -51,7 +47,7 @@ class ArticleRecyclerAdapter(val articleList: ArrayList<Article>, val listener: 
                 likedArticleRef.get()
                     .addOnSuccessListener { documentSnapshot ->
                         if (documentSnapshot.exists()) {
-                            // Tài liệu đã tồn tại trong Firestore, thực hiện cập nhật
+                            // document not exits on firestore
                             if(itemView.likeBtn.isChecked){
                                 likedArticleRef.update("${userId}", true)
                             }else
@@ -59,14 +55,14 @@ class ArticleRecyclerAdapter(val articleList: ArrayList<Article>, val listener: 
                                 likedArticleRef.update("${userId}", false)
                             }
                         } else {
-                            // Tài liệu không tồn tại trong Firestore, ta có thể tạo mới và cập nhật
+                            // document not exits on firestore, set new doucment
                             likedArticleRef.set( hashMapOf<String, Any>(
                                     "${userId}" to true
                             ))
                         }
                     }
                     .addOnFailureListener { exception ->
-                        // resolv exception
+                        // resolve exception
                     }
             }
         }

@@ -1,16 +1,14 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true">
     <TableLayout
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:stretchColumns="1">
         <androidx.constraintlayout.widget.ConstraintLayout
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            xmlns:tools="http://schemas.android.com/tools"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             tools:context=".fragment.ArticlesDetailFragment">
@@ -37,16 +35,16 @@
                 />
 
             <CheckBox
+                android:id="@+id/likedBtnDetail"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
                 android:button="@drawable/seletor_wishlist_item"
-
-                android:layout_width="42dp"
-                android:layout_height="42dp"
-                android:layout_marginTop="200dp"
-                android:src="@drawable/like_btn"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.948"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/ivArticlesDetail" />
+                android:scaleX="2"
+                android:scaleY="2"
+                app:layout_constraintBottom_toBottomOf="@+id/ivArticlesDetail"
+                app:layout_constraintEnd_toEndOf="@+id/ivArticlesDetail"
+                android:layout_marginBottom="-40dp"
+                />
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
