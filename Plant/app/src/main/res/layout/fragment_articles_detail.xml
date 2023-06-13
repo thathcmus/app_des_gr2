@@ -64,6 +64,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     >
                     <TextView
+                        android:id="@+id/articlesStatus1"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:text="VEGETABLES"
@@ -75,6 +76,7 @@
                         android:padding="4dp"
                         />
                     <TextView
+                        android:id="@+id/articlesStatus2"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:text="GARDEN"

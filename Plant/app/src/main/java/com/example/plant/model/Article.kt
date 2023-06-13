@@ -12,5 +12,6 @@ data class Article(
     var posterAvatar: String = "",
     var posterName: String = "",
     var createdAt: String = "",
+    var status: List<String> = emptyList()
 ) :
     Parcelable {}

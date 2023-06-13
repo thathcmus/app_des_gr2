@@ -41,6 +41,8 @@ class ArticlesDetailFragment : Fragment() {
         if (bundle != null) {
             articleDetail = bundle?.let { Article::class.getParcelable(it, constant.ARTICLE) }!!
             GlideLoader(this.requireContext()).loadUserPictureFromUrl(articleDetail.image,binding.ivArticlesDetail, R.drawable.placeholderloading)
+            binding.articlesStatus1.text = articleDetail.status[0]
+            binding.articlesStatus2.text = articleDetail.status[1]
             binding.titleArticlesDetail.text = articleDetail.title
             GlideLoader(this.requireContext()).loadUserPictureFromUrl(articleDetail.posterAvatar,binding.ivPosterAvatarDetail, R.drawable.placeholderloading)
             binding.tvPosterNameDetail.text = articleDetail.posterName
@@ -49,7 +51,7 @@ class ArticlesDetailFragment : Fragment() {
             articleId = articleDetail.id
             //get liked btn status
             val likedArticleRef = Firebase.firestore.collection("likedArticles").document(articleId)
-                    likedArticleRef
+            likedArticleRef
                         .get()
                         .addOnSuccessListener { documentSnapshot ->
                             binding.likedBtnDetail.isChecked = documentSnapshot.exists() && documentSnapshot.contains("${userId}") && documentSnapshot.getBoolean("${userId}")!!
