@@ -12,6 +12,7 @@
         android:layout_height="wrap_content"
         android:text="Adding New"
         android:textSize="30sp"
+        android:textColor="#06F31E"
         android:layout_marginTop="10sp"
         android:layout_marginStart="20sp" />
 
@@ -133,7 +134,9 @@
         android:layout_marginHorizontal="20sp"
         android:layout_gravity="center"
         android:text="save"
-        android:textAllCaps="true" />
+        android:textAllCaps="true"
+        android:backgroundTint="@color/btn_color"
+        android:background="@drawable/border_button"/>
 
     <ImageView
         android:layout_width="match_parent"
