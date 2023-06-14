@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import com.example.plant.AddingNewActivity
 import com.example.plant.activities.Home.HomeActivity
 import com.example.plant.databinding.FragmentPhotographyInputDataBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment

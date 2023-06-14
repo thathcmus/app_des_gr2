@@ -5,14 +5,17 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
+import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import com.example.plant.AddingNewActivity
 import com.example.plant.R
 import com.example.plant.constant.constant
 import com.example.plant.fragment.HomeFragment
 import com.example.plant.fragment.ProfileFragment
 import com.example.plant.fragment.UpdateProfileFragment
 import com.example.plant.util.FragmentUtil
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.android.synthetic.main.activity_home.bottomNavBar
 
 //import kotlinx.android.synthetic.main.activity_home.btnLogout
@@ -25,6 +28,12 @@ class HomeActivity : AppCompatActivity() {
         supportActionBar?.hide()
         init()
         listenerEvent()
+
+        val floatingBtnAdding = findViewById<FloatingActionButton>(R.id.floatingBtnAdding)
+            .setOnClickListener {
+                startActivity(Intent(this, AddingNewActivity::class.java))
+            }
+
     }
     fun init()
     {
