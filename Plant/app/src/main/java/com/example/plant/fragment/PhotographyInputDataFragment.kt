@@ -1,11 +1,14 @@
 package com.example.plant.fragment
 
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import com.example.plant.AddingNewActivity
+import com.example.plant.activities.Home.HomeActivity
 import com.example.plant.databinding.FragmentPhotographyInputDataBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.firebase.firestore.FirebaseFirestore
@@ -77,12 +80,14 @@ class PhotographyInputDataFragment(private val imageUri: Uri?) : BottomSheetDial
                             }
                             // đóng bottom sheet
                             dismiss()
+                            startActivity(Intent(requireContext(), HomeActivity::class.java))
                         }
                     }
                 } else { // Nếu tải lên thất bại
                     Toast.makeText(requireContext(), task.exception?.message, Toast.LENGTH_SHORT).show()
                     // đóng bottom sheet
                     dismiss()
+                    startActivity(Intent(requireContext(), HomeActivity::class.java))
                 }
             }
         }

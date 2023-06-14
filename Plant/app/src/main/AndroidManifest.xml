@@ -24,7 +24,7 @@
         android:theme="@style/Theme.AppCompat.Light"
         tools:targetApi="31">
         <activity
-            android:name=".NavigationTestActivity"
+            android:name=".AddingNewActivity"
             android:exported="false" />
         <activity
             android:name=".activities.Splash.SplashActivity"
