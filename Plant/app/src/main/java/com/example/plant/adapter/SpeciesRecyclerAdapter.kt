@@ -4,7 +4,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SectionIndexer
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.plant.R
 import com.example.plant.model.Species
@@ -12,8 +11,8 @@ import com.example.plant.util.Helpers.Companion.sectionsHelper
 import kotlinx.android.synthetic.main.species_item.view.tv_alphabet
 import java.util.Locale
 
-class RecyclerViewAdapter(private val speciesList: ArrayList<Species>, val listener: MyClickListener) :
-    RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>(), SectionIndexer {
+class SpeciesRecyclerAdapter(private val speciesList: MutableList<Species>, val listener: MyClickListener) :
+    RecyclerView.Adapter<SpeciesRecyclerAdapter.ViewHolder>(), SectionIndexer {
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         init {
             itemView.setOnClickListener {
@@ -62,7 +61,7 @@ class RecyclerViewAdapter(private val speciesList: ArrayList<Species>, val liste
             var i = 0
             val size = speciesList.size
             while (i < size) {
-                val section = speciesList[i].toString().uppercase(Locale.getDefault())
+                val section = speciesList[i].name[0].toString().uppercase(Locale.getDefault())
                 if (!sections.contains(section)) {
                     sections.add(section)
                     mSectionPositions?.add(i)

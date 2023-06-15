@@ -6,30 +6,26 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.plant.R
-import com.example.plant.adapter.RecyclerViewAdapter
+import com.example.plant.adapter.SpeciesRecyclerAdapter
 import com.example.plant.constant.constant
 import com.example.plant.databinding.FragmentSpeciesBinding
 import com.example.plant.model.Species
 import com.example.plant.util.FragmentUtil
 import com.google.firebase.firestore.FirebaseFirestore
-import `in`.myinnos.alphabetsindexfastscrollrecycler.IndexFastScrollRecyclerView
-import java.util.Objects
+import com.google.firebase.firestore.Query
 
-class SpeciesFragment :  Fragment(), RecyclerViewAdapter.MyClickListener {
+class SpeciesFragment :  Fragment(), SpeciesRecyclerAdapter.MyClickListener {
 
     private lateinit var binding: FragmentSpeciesBinding
     private var speciesList: MutableList<Species> = mutableListOf()
 
-    var mRecyclerView: IndexFastScrollRecyclerView? = null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
         binding = FragmentSpeciesBinding.inflate(layoutInflater)
-        initialiseUI()
         //get data
         getData()
         listenEvent()
@@ -38,22 +34,39 @@ class SpeciesFragment :  Fragment(), RecyclerViewAdapter.MyClickListener {
     fun getData () {
 
         FirebaseFirestore.getInstance().collection("species")
+            .orderBy("name", Query.Direction.ASCENDING)
             .get()
             .addOnSuccessListener { species ->
                 speciesList  = species.toObjects(Species::class.java)
                 //show into recycleview
                 binding.rcSpecies.adapter = this.activity?.let {
-                    RecyclerViewAdapter( speciesList as ArrayList<Species>, this@SpeciesFragment)
+                    SpeciesRecyclerAdapter( speciesList , this@SpeciesFragment)
                 }
                 binding.rcSpecies.layoutManager = LinearLayoutManager(this.requireContext(), LinearLayoutManager.VERTICAL, false)
+                binding.rcSpecies?.apply {
+                    setIndexTextSize(16)
+                    setIndexBarTextColor("#838383");
+                    setIndexBarColor(R.color.Home_background_color);
+                    setIndexBarCornerRadius(4)
+                    setIndexBarTransparentValue(0.4.toFloat())
+                    setPreviewPadding(0)
+                    setPreviewTextSize(60)
+                    setPreviewTransparentValue(0.6f)
+                    setIndexBarVisibility(true)
+                    setIndexBarStrokeVisibility(true)
+                    setIndexBarStrokeWidth(0)
+                    setIndexBarHighLightTextVisibility(true)
+                }
                 binding.rcSpecies.setHasFixedSize(true)
 
             }
             .addOnFailureListener { exception ->
-            }
+                }
     }
     fun listenEvent() {
-
+        binding.ivBacktoHome.setOnClickListener(){
+            FragmentUtil(activity).replaceFragment(HomeFragment(),R.id.HomeFrameLayout,false )
+        }
     }
     override fun onClick(position: Int) {
         val PlantFragment = PlantFragment()
@@ -63,31 +76,4 @@ class SpeciesFragment :  Fragment(), RecyclerViewAdapter.MyClickListener {
         FragmentUtil(this.activity).replaceFragment(PlantFragment,
             R.id.HomeFrameLayout,false)
     }
-
-    /*override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        onCreate(savedInstanceState)
-        setContentView(R.layout.fragment_species)
-        mRecyclerView = findViewById(R.id.rcSpecies)
-        initialiseUI()
-    }*/
-    private fun initialiseUI() {
-        mRecyclerView?.apply {
-            //layoutManager = LinearLayoutManager(this@SpeciesFragment)
-            adapter = RecyclerViewAdapter(speciesList as ArrayList<Species>, this@SpeciesFragment)
-            setIndexTextSize(12)
-            setIndexBarCornerRadius(0)
-            setIndexBarTransparentValue(0.4.toFloat())
-            setPreviewPadding(0)
-            setPreviewTextSize(60)
-            setPreviewTransparentValue(0.6f)
-            setIndexBarVisibility(true)
-            setIndexBarStrokeVisibility(true)
-            setIndexBarStrokeWidth(1)
-            setIndexBarHighLightTextVisibility(true)
-        }
-        Objects.requireNonNull<RecyclerView.LayoutManager>(mRecyclerView?.layoutManager)
-            .scrollToPosition(0)
-    }
-
 }
