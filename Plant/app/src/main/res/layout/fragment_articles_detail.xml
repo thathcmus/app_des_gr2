@@ -36,14 +36,15 @@
 
             <CheckBox
                 android:id="@+id/likedBtnDetail"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:button="@drawable/seletor_wishlist_item"
-                android:scaleX="2"
-                android:scaleY="2"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:button="@drawable/like_detail_btn"
+                android:scaleX="1.8"
+                android:scaleY="1.8"
+                android:layout_marginEnd="12dp"
                 app:layout_constraintBottom_toBottomOf="@+id/ivArticlesDetail"
                 app:layout_constraintEnd_toEndOf="@+id/ivArticlesDetail"
-                android:layout_marginBottom="-40dp"
+                android:layout_marginBottom="-36dp"
                 />
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"

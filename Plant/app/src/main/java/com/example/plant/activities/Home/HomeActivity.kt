@@ -37,7 +37,6 @@ class HomeActivity : AppCompatActivity() {
                 R.id.profile_action -> {
                     replaceFragment(ProfileFragment())
                     true
-
                 }
                 else -> false
             }
