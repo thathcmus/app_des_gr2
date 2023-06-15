@@ -15,9 +15,6 @@ import com.example.plant.fragment.UpdateProfileFragment
 import com.example.plant.util.FragmentUtil
 import kotlinx.android.synthetic.main.activity_home.bottomNavBar
 
-//import kotlinx.android.synthetic.main.activity_home.btnLogout
-//import kotlinx.android.synthetic.main.activity_home.btnProfile
-
 class HomeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
