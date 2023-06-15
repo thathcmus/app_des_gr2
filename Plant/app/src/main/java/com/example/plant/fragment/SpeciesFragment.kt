@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.plant.R
 import com.example.plant.adapter.SpeciesRecyclerAdapter
@@ -65,15 +66,16 @@ class SpeciesFragment :  Fragment(), SpeciesRecyclerAdapter.MyClickListener {
     }
     fun listenEvent() {
         binding.ivBacktoHome.setOnClickListener(){
-            FragmentUtil(activity).replaceFragment(HomeFragment(),R.id.HomeFrameLayout,false )
+            val fragmentManager = requireActivity().supportFragmentManager
+            fragmentManager.popBackStack()
         }
     }
     override fun onClick(position: Int) {
         val PlantFragment = PlantFragment()
         val bundle = Bundle()
-        bundle.putParcelable(constant.SPECIES, speciesList[position])
+        bundle.putString(constant.SPECIES, speciesList[position].name)
         PlantFragment.arguments = bundle
         FragmentUtil(this.activity).replaceFragment(PlantFragment,
-            R.id.HomeFrameLayout,false)
+            R.id.HomeFrameLayout,true)
     }
 }

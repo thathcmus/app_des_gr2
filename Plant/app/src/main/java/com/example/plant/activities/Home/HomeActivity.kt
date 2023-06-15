@@ -25,7 +25,7 @@ class HomeActivity : AppCompatActivity() {
     }
     fun init()
     {
-        replaceFragment(HomeFragment())
+        FragmentUtil(this).replaceFragment(HomeFragment(),R.id.HomeFrameLayout,true)
     }
     fun listenerEvent(){
         bottomNavBar.setOnItemSelectedListener { item ->
@@ -37,6 +37,7 @@ class HomeActivity : AppCompatActivity() {
                 R.id.profile_action -> {
                     replaceFragment(ProfileFragment())
                     true
+
                 }
                 else -> false
             }

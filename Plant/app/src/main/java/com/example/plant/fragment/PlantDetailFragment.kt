@@ -2,6 +2,7 @@ package com.example.plant.fragment
 
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +12,7 @@ import com.example.plant.constant.constant
 import com.example.plant.databinding.FragmentPlantDetailBinding
 import com.example.plant.glide.GlideLoader
 import com.example.plant.model.Plant
+import com.example.plant.model.User
 import com.example.plant.util.FragmentUtil
 import kotlin.reflect.KClass
 
@@ -28,16 +30,18 @@ class PlantDetailFragment : Fragment() {
         return binding.root
     }
     private fun getPlantDetail() {
-        val bundle = this.arguments
+        val bundle = this@PlantDetailFragment.arguments
         if (bundle != null) {
             plantDetail = bundle?.let { Plant::class.getParcelable(it, constant.PLANT) }!!
             GlideLoader(this.requireContext()).loadUserPictureFromUrl(plantDetail.image,binding.ivPlantDetail, R.drawable.placeholderloading)
+            binding.plantStatus1.text = plantDetail.status[0]
+            binding.plantStatus2.text = plantDetail.status[1]
             binding.namePlant.text = plantDetail.name
             binding.kingdomPlant.text = plantDetail.kingdom
             binding.familyPlant.text = plantDetail.family
-            binding.plantContent.text = plantDetail.content
+            binding.plantContent.text = plantDetail.description
         }
-    }
+        }
 
     inline fun <reified T : Any> KClass<T>.getParcelable(bundle: Bundle, key: String): T? =
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU)
@@ -47,8 +51,8 @@ class PlantDetailFragment : Fragment() {
 
     fun listenEvent() {
         binding.ivBackPlantDetail.setOnClickListener() {
-            FragmentUtil(this.activity).replaceFragment(PlantFragment(),
-                R.id.HomeFrameLayout,false)
+            val fragmentManager = requireActivity().supportFragmentManager
+            fragmentManager.popBackStack()
         }
     }
 

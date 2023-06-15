@@ -1,6 +1,7 @@
 package com.example.plant.fragment
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,9 +14,12 @@ import com.example.plant.databinding.FragmentPlantBinding
 import com.example.plant.model.Plant
 import com.example.plant.util.FragmentUtil
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
+import kotlinx.android.synthetic.main.fragment_home.plant
 
 class PlantFragment : Fragment(), PlantRecyclerAdapter.MyClickListener  {
     private lateinit var binding: FragmentPlantBinding
+    private var speciesName: String = ""
     private var plantList: MutableList<Plant> = mutableListOf()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,8 +33,10 @@ class PlantFragment : Fragment(), PlantRecyclerAdapter.MyClickListener  {
         return binding.root
     }
     fun getData () {
-
-        FirebaseFirestore.getInstance().collection("plant")
+        speciesName = arguments?.getString(constant.SPECIES).toString();
+        binding.tvPlantName.text = speciesName
+            FirebaseFirestore.getInstance().collection("plant")
+            .whereEqualTo("species", speciesName)
             .get()
             .addOnSuccessListener { plant ->
                 plantList  = plant.toObjects(Plant::class.java)
@@ -46,18 +52,18 @@ class PlantFragment : Fragment(), PlantRecyclerAdapter.MyClickListener  {
             }
     }
     fun listenEvent() {
-//        binding.ivBackPlant.setOnClickListener() {
-//            FragmentUtil(this.activity).replaceFragment(SpeciesFragment(),
-//                R.id.HomeFrameLayout,false)
-//        }
+        binding.ivBacktoSpecies.setOnClickListener() {
+            val fragmentManager = requireActivity().supportFragmentManager
+            fragmentManager.popBackStack()
+        }
     }
     override fun onClick(position: Int) {
-        val PlantDetailFragment = PlantDetailFragment()
+        val plantDetailFragment = PlantDetailFragment()
         val bundle = Bundle()
         bundle.putParcelable(constant.PLANT, plantList[position])
-        PlantDetailFragment.arguments= bundle
-        FragmentUtil(this.activity).replaceFragment(PlantDetailFragment(),
-            R.id.HomeFrameLayout,false)
+        plantDetailFragment.arguments = bundle
+        FragmentUtil(this.activity).replaceFragment(plantDetailFragment,
+            R.id.HomeFrameLayout,true)
     }
 
 }

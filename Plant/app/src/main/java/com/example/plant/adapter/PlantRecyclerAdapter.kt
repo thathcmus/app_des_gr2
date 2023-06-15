@@ -7,10 +7,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.plant.R
 import com.example.plant.glide.GlideLoader
 import com.example.plant.model.Plant
-import kotlinx.android.synthetic.main.fragment_plant_detail.view.imageView
 import kotlinx.android.synthetic.main.plant_item.view.ivPlant
-import kotlinx.android.synthetic.main.plant_item.view.tvPlantDescription
-import kotlinx.android.synthetic.main.plant_item.view.tvPlantFamily
+import kotlinx.android.synthetic.main.plant_item.view.tvDescPlant
+import kotlinx.android.synthetic.main.plant_item.view.tvFamily
 import kotlinx.android.synthetic.main.plant_item.view.tvPlantKingdom
 import kotlinx.android.synthetic.main.plant_item.view.tvPlantName
 
@@ -34,8 +33,8 @@ class PlantRecyclerAdapter(val plantList: ArrayList<Plant>, val listener: MyClic
             GlideLoader(context).loadUserPictureFromUrl(plantList[position].image,holder.itemView.ivPlant, R.drawable.placeholderloading)
             tvPlantName.text = plantList[position].name
             tvPlantKingdom.text = plantList[position].kingdom
-            tvPlantFamily.text = plantList[position].family
-            tvPlantDescription.text = plantList[position].content
+            tvFamily.text = plantList[position].family
+            tvDescPlant.text = plantList[position].description
         }
     }
     override fun getItemCount(): Int {

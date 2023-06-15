@@ -105,7 +105,7 @@ class HomeFragment : Fragment() {
             FragmentUtil(this.activity).replaceFragment(
                 SpeciesFragment(),
                 R.id.HomeFrameLayout,
-                false
+                true
             )
         }
         binding.articlesBtn.setOnClickListener() {
