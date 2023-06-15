@@ -6,7 +6,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.Toast
+import com.example.plant.R
 import com.example.plant.activities.Home.HomeActivity
 import com.example.plant.databinding.FragmentPhotographyInputDataBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -19,6 +22,9 @@ class PhotographyInputDataFragment(private val imageUri: Uri?) : BottomSheetDial
     private lateinit var binding: FragmentPhotographyInputDataBinding
     private lateinit var storageRef: StorageReference
     private lateinit var firebaseFirestore: FirebaseFirestore
+
+    private var plantType = ""
+    private var plantStatus = mutableListOf<String>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,21 +43,25 @@ class PhotographyInputDataFragment(private val imageUri: Uri?) : BottomSheetDial
             }
         }
 
+        selectPlantTypeDropDownMenu()
+
+        // Firestore instance & Storage folder reference initialization
         storageRef = FirebaseStorage.getInstance().reference.child("Photography")
         firebaseFirestore = FirebaseFirestore.getInstance()
 
     }
 
     companion object{
+        // Error list for input
         const val ERROR_PLANT_NAME_EMPTY = "The plant name must not be empty"
         const val ERROR_PLANT_NAME_LENGTH = "The plant name cannot exceed 30 characters"
         const val ERROR_PLANT_DESCRIPTION_EMPTY = "The plant description must not be empty"
-        const val ERROR_PLANT_DESCRIPTION_LENGTH = "This field requires a minimum of 50 characters"
+        const val ERROR_PLANT_DESCRIPTION_LENGTH = "This field requires a minimum of 40 characters"
         const val ERROR_PLANT_FAMILY_EMPTY = "The plant family must not be empty"
         const val ERROR_PLANT_KINGDOM_EMPTY = "The plant kingdom must not be empty"
-        const val ERROR_PLANT_TYPE_EMPTY = "The type of plant must not be empty"
-        const val ERROR_PLANT_STAR_EMPTY = "The plant star must not be empty"
-        const val ERROR_PLANT_SPECIES_RANGE = "This field only accepts a number from 0 to 5"
+        const val ERROR_PLANT_TYPE_EMPTY = "The type of plant must be chosen"
+        const val ERROR_PLANT_SPECIES_EMPTY = "The plant species must not be empty"
+        const val ERROR_PLANT_STAR_RANGE_EMPTY = "This field only accepts a number from 0 to 5"
     }
 
     private fun validatePlantName(plantName: String): Pair<Boolean, String> {
@@ -66,7 +76,7 @@ class PhotographyInputDataFragment(private val imageUri: Uri?) : BottomSheetDial
     private fun validatePlantDescription(plantDescription: String): Pair<Boolean, String> {
         if (plantDescription.isEmpty()) {
             return Pair(false, ERROR_PLANT_DESCRIPTION_EMPTY)
-        } else if (plantDescription.length < 50) {
+        } else if (plantDescription.length < 40) {
             return Pair(false, ERROR_PLANT_DESCRIPTION_LENGTH)
         }
         return Pair(true, "")
@@ -87,22 +97,23 @@ class PhotographyInputDataFragment(private val imageUri: Uri?) : BottomSheetDial
     }
 
     private fun validatePlantType(plantType: String): Pair<Boolean, String> {
-        if (plantType.isEmpty()) {
+        if (plantType == "") {
             return Pair(false, ERROR_PLANT_TYPE_EMPTY)
         }
         return Pair(true, "")
     }
 
     private fun validatePlantStar(plantStar: String): Pair<Boolean, String> {
-        if (plantStar.isEmpty()) {
-            return Pair(false, ERROR_PLANT_STAR_EMPTY)
+        val star = plantStar.toDoubleOrNull()
+        if (star == null || star !in 1.0..5.0) {
+            return Pair(false, ERROR_PLANT_STAR_RANGE_EMPTY)
         }
         return Pair(true, "")
     }
 
     private fun validatePlantSpecies(PlantSpecies: String): Pair<Boolean, String> {
         if (PlantSpecies.isEmpty()) {
-            return Pair(false, ERROR_PLANT_SPECIES_RANGE)
+            return Pair(false, ERROR_PLANT_SPECIES_EMPTY)
         }
         return Pair(true, "")
     }
@@ -132,10 +143,9 @@ class PhotographyInputDataFragment(private val imageUri: Uri?) : BottomSheetDial
             binding.photoKingdom.error = PlantKingdomMessError
         }
 
-        val plantType = binding.photoPlantType.text?.trim().toString()
         val (isValidatePlantType, PlantTypeMessError) = validatePlantType(plantType)
         if (!isValidatePlantType) {
-            binding.photoPlantType.error = PlantTypeMessError
+            binding.autoCompleteTextPlantType.error = PlantTypeMessError
         }
 
         val plantStar = binding.photoStar.text?.trim().toString()
@@ -160,6 +170,20 @@ class PhotographyInputDataFragment(private val imageUri: Uri?) : BottomSheetDial
         return false
     }
 
+    private fun selectPlantTypeDropDownMenu(){
+
+        val items = listOf("Home plant", "Indoor plant", "Climbing plant", "Huge plant")
+        val adapter = ArrayAdapter(requireContext(), R.layout.list_type_of_plant_adding_new, items)
+        binding.autoCompleteTextPlantType.setAdapter(adapter)
+
+        binding.autoCompleteTextPlantType.onItemClickListener = AdapterView.OnItemClickListener { parent, _, position, _ ->
+            plantType = parent.getItemAtPosition(position).toString()
+                .split(" ").joinToString(" "){
+                    it.capitalize()
+                } + "s"
+        }
+    }
+
     private fun uploadImage() {
         // Tạo tài liệu mới trong Firestore
         val newDocumentRef = firebaseFirestore.collection("plant").document()
@@ -179,13 +203,13 @@ class PhotographyInputDataFragment(private val imageUri: Uri?) : BottomSheetDial
                     storageRef.downloadUrl.addOnSuccessListener { imageUrl ->
                         val map = HashMap<String, Any>() // Sử dụng HashMap để lưu đường dẫn và các trường khác
                         map["image"] = imageUrl.toString()
-                        map["name"] = binding.photoName.text.toString()
-                        map["description"] = binding.photoDescription.text.toString()
-                        map["plantType"] = binding.photoPlantType.text.toString()
-                        map["family"] = binding.photoFamily.text.toString()
-                        map["kingdom"] = binding.photoKingdom.text.toString()
-                        map["species"] = binding.photoSpecies.text.toString()
-                        map["star"] = binding.photoStar.text.toString()
+                        map["name"] = binding.photoName.text?.trim().toString()
+                        map["description"] = binding.photoDescription.text?.trim().toString()
+                        map["plantType"] = plantType
+                        map["family"] = binding.photoFamily.text?.trim().toString()
+                        map["kingdom"] = binding.photoKingdom.text?.trim().toString()
+                        map["species"] = binding.photoSpecies.text?.trim().toString().toUpperCase()
+                        map["star"] = binding.photoStar.text?.trim().toString()
                         map["id"] = documentId
 
                         // Cập nhật dữ liệu vào tài liệu trên Firestore

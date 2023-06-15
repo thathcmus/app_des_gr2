@@ -1,21 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:focusableInTouchMode="true"
+    android:theme="@style/Theme.Material3.DayNight.NoActionBar"
     tools:context=".fragment.PhotographyInputDataFragment">
 
+<!--    Title-->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Adding New"
         android:textSize="30sp"
-        android:textColor="#06F31E"
+        android:textColor="#0BD11F"
         android:layout_marginTop="10sp"
         android:layout_marginStart="20sp" />
 
+<!--    ScrollView for data input-->
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="350sp">
@@ -25,6 +28,7 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
+<!--            Plant name input-->
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -39,6 +43,7 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
+<!--            Plant description input-->
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -53,6 +58,25 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
+<!--            Dropdown menu for plant type selection-->
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20sp"
+                android:layout_marginVertical="10sp"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+
+                <AutoCompleteTextView
+                    android:id="@+id/autoCompleteTextPlantType"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="none"
+                    android:editable="false"
+                    android:hint="Select type of plant"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+<!--            Plant family input-->
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -67,6 +91,7 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
+<!--            Plant kingdom input-->
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -81,20 +106,7 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="20dp"
-                android:layout_marginVertical="10dp">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/photoPlantType"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Plant type" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
+<!--            Plant species input-->
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -109,6 +121,7 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
+<!--            Plant star input-->
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -123,7 +136,6 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
-
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
@@ -131,17 +143,13 @@
         android:id="@+id/btnSave"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="20sp"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginVertical="10dp"
         android:layout_gravity="center"
         android:text="save"
+        android:textColor="@color/white"
         android:textAllCaps="true"
         android:backgroundTint="@color/btn_color"
         android:background="@drawable/border_button"/>
-
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="100sp"/>
-
-
 
 </LinearLayout>
