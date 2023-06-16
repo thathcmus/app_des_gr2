@@ -1,0 +1,200 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:layout_marginBottom="100dp"
+    >
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:stretchColumns="1">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".fragment.PlantDetailFragment">
+
+            <ImageView
+                android:id="@+id/ivBackPlantDetail"
+                android:layout_width="36dp"
+                android:layout_height="30dp"
+                android:layout_margin="20dp"
+                android:elevation="10dp"
+                android:src="@drawable/back_icon"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/ivPlantDetail"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/plant"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <CheckBox
+                android:id="@+id/plantLikeBtn"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:button="@drawable/like_detail_btn"
+                android:scaleX="1.8"
+                android:scaleY="1.8"
+                app:layout_constraintHorizontal_bias="0.95"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="@+id/ivPlantDetail"
+                android:layout_marginBottom="-40dp">
+            </CheckBox>
+
+            <TextView
+                android:id="@+id/name_plant"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:text="Name"
+                android:textColor="#36455a"
+                android:textSize="27dp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@+id/rating"
+                app:layout_constraintStart_toStartOf="parent"
+                />
+
+            <LinearLayout
+                android:id="@+id/status"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginBottom="16dp"
+                android:orientation="horizontal"
+                android:layout_marginTop="16dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ivPlantDetail"
+                >
+                <TextView
+                    android:id="@+id/plantStatus1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="20dp"
+                    android:background="#E8ECF1"
+                    android:padding="4dp"
+                    android:text="VEGETABLES"
+                    android:textColor="#2F91EB"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/plantStatus2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:background="#E8ECF1"
+                    android:padding="4dp"
+                    android:text="GARDEN"
+                    android:textColor="#2F91EB"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+            <RatingBar
+                android:id="@+id/rating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/status"
+                app:layout_constraintStart_toStartOf="parent"
+                android:numStars="5"
+                android:stepSize="0.5"
+                android:theme="@style/RatingBar"
+                style="?android:attr/ratingBarStyleIndicator"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="6dp"
+                />
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="69dp"
+                android:layout_height="17dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="72dp"
+                android:text="KINGDOM"
+                android:textColor="#495566"
+                android:textSize="14dp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@+id/textView4"
+                app:layout_constraintStart_toStartOf="@+id/name_plant"
+                app:layout_constraintTop_toBottomOf="@+id/name_plant" />
+
+            <TextView
+                android:id="@+id/kingdom_plant"
+                android:layout_width="wrap_content"
+                android:layout_height="17dp"
+                android:text="kingdom"
+                android:textColor="#6a6f7d"
+                android:textSize="14dp"
+                android:layout_marginTop="6dp"
+                app:layout_constraintStart_toStartOf="@+id/textView2"
+                app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="69dp"
+                android:layout_height="17dp"
+                android:layout_marginStart="72dp"
+                android:layout_marginEnd="110dp"
+                android:text="FAMILY"
+                android:textColor="#495566"
+                android:textSize="14dp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/textView2"
+                app:layout_constraintTop_toTopOf="@+id/textView2" />
+
+            <TextView
+                android:id="@+id/family_plant"
+                android:layout_width="wrap_content"
+                android:layout_height="17dp"
+                android:layout_marginTop="7dp"
+                android:layout_marginBottom="41dp"
+                android:text="family"
+                android:textColor="#6a6f7d"
+                android:textSize="14dp"
+                app:layout_constraintBottom_toTopOf="@+id/plantContent"
+                app:layout_constraintStart_toStartOf="@+id/textView4"
+                app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="17dp"
+                android:layout_marginTop="11dp"
+                android:layout_marginBottom="12dp"
+                android:text="DESCRIPTION"
+                android:textColor="#495566"
+                android:textSize="14dp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/plantContent"
+                app:layout_constraintStart_toStartOf="@+id/kingdom_plant"
+                app:layout_constraintTop_toBottomOf="@+id/kingdom_plant" />
+
+            <TextView
+                android:id="@+id/plantContent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="84dp"
+                android:layout_marginTop="10dp"
+                android:text="The word derives, through Latin, from the Ancient Greek κάκτος, kaktos, a name orig inally used by Theophrastus for a spiny plant whose identity is not certain. Cacti occur in a wide range of shapes and sizes. Most cacti live in habitats subject to at least some drought."
+                android:textSize="18sp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                app:layout_constraintTop_toBottomOf="@id/textView3"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </TableLayout>
+
+
+</ScrollView>

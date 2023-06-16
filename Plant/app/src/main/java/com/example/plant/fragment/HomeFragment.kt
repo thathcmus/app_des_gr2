@@ -106,7 +106,25 @@ class HomeFragment : Fragment() {
     }
     private fun listenEvent() {
         binding.ivAvatar.setOnClickListener() {
-            FragmentUtil(this.activity).replaceFragment(ProfileFragment(),R.id.HomeFrameLayout,false)
+            FragmentUtil(this.activity).replaceFragment(
+                ProfileFragment(),
+                R.id.HomeFrameLayout,
+                false
+            )
+        }
+        binding.speciesBtn.setOnClickListener() {
+            FragmentUtil(this.activity).replaceFragment(
+                SpeciesFragment(),
+                R.id.HomeFrameLayout,
+                true
+            )
+        }
+        binding.articlesBtn.setOnClickListener() {
+            FragmentUtil(this.activity).replaceFragment(
+                ArticlesFragment(),
+                R.id.HomeFrameLayout,
+                false
+            )
         }
     }
     fun setCurrentUser(currentUser: User){

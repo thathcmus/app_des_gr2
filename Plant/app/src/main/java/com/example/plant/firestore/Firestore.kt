@@ -4,11 +4,14 @@ import android.app.Activity
 import android.util.Log
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.plant.activities.RegisterAccount.RegisterActivity
+import com.example.plant.adapter.ArticleRecyclerAdapter
 import com.example.plant.constant.constant
 import com.example.plant.fragment.HomeFragment
 import com.example.plant.fragment.ProfileFragment
 import com.example.plant.fragment.UpdateProfileFragment
+import com.example.plant.model.Article
 import com.example.plant.model.User
 import com.example.plant.util.ProgressBarLoading
 import com.google.firebase.auth.FirebaseUser
@@ -72,4 +75,21 @@ class Firestore {
             }
     }
 
+//    fun getLikeBtnStatus(userId: String, postKey: String) {
+//        val likeReference = mFireStore.collection("likedArticles")
+//        likeReference
+//            .get()
+//            .addOnSuccessListener { articles ->
+//                articleList  = articles.toObjects(Article::class.java)
+//                //show into recycleview
+//                binding.rcArticles.adapter = this.activity?.let {
+//                    ArticleRecyclerAdapter(articleList as ArrayList<Article>,this@ArticlesFragment)
+//                }
+//                binding.rcArticles.layoutManager = LinearLayoutManager(this.requireContext(), LinearLayoutManager.VERTICAL, false)
+//                binding.rcArticles.setHasFixedSize(true)
+//
+//            }
+//            .addOnFailureListener { exception ->
+//            }
+//    }
 }

@@ -18,9 +18,6 @@ import com.example.plant.util.FragmentUtil
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.android.synthetic.main.activity_home.bottomNavBar
 
-//import kotlinx.android.synthetic.main.activity_home.btnLogout
-//import kotlinx.android.synthetic.main.activity_home.btnProfile
-
 class HomeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,7 +34,7 @@ class HomeActivity : AppCompatActivity() {
     }
     fun init()
     {
-        replaceFragment(HomeFragment())
+        FragmentUtil(this).replaceFragment(HomeFragment(),R.id.HomeFrameLayout,true)
     }
     fun listenerEvent(){
         bottomNavBar.setOnItemSelectedListener { item ->
