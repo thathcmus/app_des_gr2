@@ -67,7 +67,9 @@ class PhotographyInputDataFragment(private val imageUri: Uri?) : BottomSheetDial
         const val ERROR_PLANT_KINGDOM_EMPTY = "The plant kingdom must not be empty"
         const val ERROR_PLANT_TYPE_EMPTY = "The type of plant must be chosen"
         const val ERROR_PLANT_SPECIES_EMPTY = "The plant species must not be empty"
+        const val ERROR_PLANT_THUMNAIL_EMPTY = "The thumnail must not be empty"
         const val ERROR_PLANT_STAR_RANGE_EMPTY = "This field only accepts a number from 0 to 5"
+
     }
 
     private fun validatePlantName(plantName: String): Pair<Boolean, String> {
@@ -109,6 +111,18 @@ class PhotographyInputDataFragment(private val imageUri: Uri?) : BottomSheetDial
         return Pair(true, "")
     }
 
+    private fun validateThumnail1(thumnail1: String): Pair<Boolean, String> {
+        if (thumnail1.isEmpty()) {
+            return Pair(false, ERROR_PLANT_THUMNAIL_EMPTY)
+        }
+        return Pair(true, "")
+    }
+    private fun validateThumnail2(thumnail2: String): Pair<Boolean, String> {
+        if (thumnail2.isEmpty()) {
+            return Pair(false, ERROR_PLANT_THUMNAIL_EMPTY)
+        }
+        return Pair(true, "")
+    }
     private fun validatePlantStar(plantStar: String): Pair<Boolean, String> {
         val star = plantStar.toDoubleOrNull()
         if (star == null || star !in 0.0..5.0) {
@@ -152,6 +166,18 @@ class PhotographyInputDataFragment(private val imageUri: Uri?) : BottomSheetDial
         val (isValidatePlantType, PlantTypeMessError) = validatePlantType(plantType)
         if (!isValidatePlantType) {
             binding.autoCompleteTextPlantType.error = PlantTypeMessError
+        }
+
+        val thumnail1 = binding.thumbnail1.text?.trim().toString()
+        val (isValidateThumnail1, PlantThumnail1MessError) = validateThumnail1(thumnail1)
+        if (!isValidateThumnail1) {
+            binding.thumbnail1.error = PlantThumnail1MessError
+        }
+
+        val thumnail2 = binding.thumbnail2.text?.trim().toString()
+        val (isValidateThumnail2, PlantThumnail2MessError) = validateThumnail2(thumnail2)
+        if (!isValidateThumnail2) {
+            binding.thumbnail2.error = PlantThumnail2MessError
         }
 
         val plantStar = binding.photoStar.text?.trim().toString()
@@ -224,6 +250,9 @@ class PhotographyInputDataFragment(private val imageUri: Uri?) : BottomSheetDial
                     // Dùng 'downloadUrl' để lấy đường dẫn tới tệp đã tải lên
                     storageRef.downloadUrl.addOnSuccessListener { imageUrl ->
                         val map = HashMap<String, Any>() // Sử dụng HashMap để lưu đường dẫn và các trường khác
+                        var thumnailList: MutableList<String> = mutableListOf()
+                        thumnailList.add(binding.thumbnail1.text.toString().uppercase())
+                        thumnailList.add(binding.thumbnail2.text.toString().uppercase())
                         map["image"] = imageUrl.toString()
                         map["name"] = binding.photoName.text?.trim().toString()
                         map["description"] = binding.photoDescription.text?.trim().toString()
@@ -233,7 +262,7 @@ class PhotographyInputDataFragment(private val imageUri: Uri?) : BottomSheetDial
                         map["species"] = binding.photoSpecies.text?.trim().toString().toUpperCase()
                         map["star"] = binding.photoStar.text?.trim().toString()
                         map["id"] = documentId
-
+                        map["status"] = thumnailList
                         // Cập nhật dữ liệu vào tài liệu trên Firestore
                         newDocumentRef.set(map).addOnCompleteListener { firestoreTask ->
                             if (firestoreTask.isSuccessful) {
