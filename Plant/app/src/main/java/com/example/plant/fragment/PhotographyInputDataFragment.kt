@@ -24,7 +24,7 @@ class PhotographyInputDataFragment(private val imageUri: Uri?) : BottomSheetDial
     private lateinit var firebaseFirestore: FirebaseFirestore
 
     private var plantType = ""
-    private var plantStatus = mutableListOf<String>()
+    private var plantTypeList = mutableListOf<String>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,12 +43,18 @@ class PhotographyInputDataFragment(private val imageUri: Uri?) : BottomSheetDial
             }
         }
 
+        initFirestoreAndStorage()
+
         selectPlantTypeDropDownMenu()
 
+        fetchPlantTypeList()
+
+    }
+
+    private fun initFirestoreAndStorage(){
         // Firestore instance & Storage folder reference initialization
         storageRef = FirebaseStorage.getInstance().reference.child("Photography")
         firebaseFirestore = FirebaseFirestore.getInstance()
-
     }
 
     companion object{
@@ -170,10 +176,26 @@ class PhotographyInputDataFragment(private val imageUri: Uri?) : BottomSheetDial
         return false
     }
 
+    private fun fetchPlantTypeList() {
+        firebaseFirestore.collection("plantType")
+            .get()
+            .addOnSuccessListener { querySnapshot ->
+                    for(document in querySnapshot){
+                        val plantType = document.getString("name")?.lowercase()?.capitalize()
+                            ?.dropLast(1)
+                        plantType?.let{
+                            plantTypeList.add(plantType)
+                        }
+                    }
+            }
+            .addOnFailureListener { exception ->
+
+            }
+    }
+
     private fun selectPlantTypeDropDownMenu(){
 
-        val items = listOf("Home plant", "Indoor plant", "Climbing plant", "Huge plant")
-        val adapter = ArrayAdapter(requireContext(), R.layout.list_type_of_plant_adding_new, items)
+        val adapter = ArrayAdapter(requireContext(), R.layout.list_type_of_plant_adding_new, plantTypeList)
         binding.autoCompleteTextPlantType.setAdapter(adapter)
 
         binding.autoCompleteTextPlantType.onItemClickListener = AdapterView.OnItemClickListener { parent, _, position, _ ->
