@@ -111,7 +111,7 @@ class PhotographyInputDataFragment(private val imageUri: Uri?) : BottomSheetDial
 
     private fun validatePlantStar(plantStar: String): Pair<Boolean, String> {
         val star = plantStar.toDoubleOrNull()
-        if (star == null || star !in 1.0..5.0) {
+        if (star == null || star !in 0.0..5.0) {
             return Pair(false, ERROR_PLANT_STAR_RANGE_EMPTY)
         }
         return Pair(true, "")
