@@ -94,124 +94,135 @@
             app:layout_constraintBottom_toBottomOf="parent"
             />
     </androidx.constraintlayout.widget.ConstraintLayout>
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constrainHeader"
-        >
-
-        <androidx.constraintlayout.widget.ConstraintLayout
+        android:fillViewport="true">
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:stretchColumns="1">
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            >
 
-            <LinearLayout
-                android:id="@+id/chooseBtn"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginTop="40dp"
-                android:gravity="center"
-                >
-                <Button
-                    android:id="@+id/addingBtn"
-                    android:layout_width="110dp"
-                    android:layout_height="wrap_content"
-                    android:background="@color/white"
-                    android:drawableTop="@drawable/camera"
-                    android:padding="12dp"
-                    android:text="ADDING NEW"
-                    android:textColor="#6A6F7D"
-                    android:textSize="13dp"
-                    />
+                android:layout_height="match_parent">
 
-                <Button
-                    android:id="@+id/speciesBtn"
-                    android:layout_width="110dp"
+                <LinearLayout
+                    android:id="@+id/chooseBtn"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/white"
-                    android:drawableTop="@drawable/s"
-                    android:padding="12dp"
-                    android:text="SPECIES"
-                    android:textColor="#6A6F7D"
-                    android:textSize="13dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginTop="40dp"
+                    android:gravity="center"
+                    >
+                    <Button
+                        android:id="@+id/addingBtn"
+                        android:layout_width="110dp"
+                        android:layout_height="wrap_content"
+                        android:background="@color/white"
+                        android:drawableTop="@drawable/camera"
+                        android:padding="12dp"
+                        android:text="ADDING NEW"
+                        android:textColor="#6A6F7D"
+                        android:textSize="13dp"
+                        />
+
+                    <Button
+                        android:id="@+id/speciesBtn"
+                        android:layout_width="110dp"
+                        android:layout_height="wrap_content"
+                        android:background="@color/white"
+                        android:drawableTop="@drawable/s"
+                        android:padding="12dp"
+                        android:text="SPECIES"
+                        android:textColor="#6A6F7D"
+                        android:textSize="13dp"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginEnd="20dp"
+                        />
+
+                    <Button
+                        android:id="@+id/articlesBtn"
+                        android:layout_width="110dp"
+                        android:layout_height="wrap_content"
+                        android:background="@color/white"
+                        android:drawableTop="@drawable/atr"
+                        android:padding="12dp"
+                        android:text="ARTICLES"
+                        android:textColor="#6A6F7D"
+                        android:textSize="13dp"
+                        />
+                </LinearLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rcPlantTypes"
+                    android:layout_width="match_parent"
+                    android:layout_height="140dp"
+                    android:layout_marginTop="10dp"
                     android:layout_marginStart="20dp"
                     android:layout_marginEnd="20dp"
-                    />
+                    android:orientation="horizontal"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/plant"
+                    tools:ignore="MissingConstraints">
 
-                <Button
-                    android:id="@+id/articlesBtn"
-                    android:layout_width="110dp"
+                </androidx.recyclerview.widget.RecyclerView>
+
+                <TextView
+                    android:id="@+id/plant"
+                    android:layout_width="150dp"
                     android:layout_height="wrap_content"
-                    android:background="@color/white"
-                    android:drawableTop="@drawable/atr"
-                    android:padding="12dp"
-                    android:text="ARTICLES"
-                    android:textColor="#6A6F7D"
-                    android:textSize="13dp"
+                    android:text="Plant Type"
+                    android:textColor="@color/text_color_bold"
+                    android:textSize="20dp"
+                    android:textStyle="bold"
+                    app:layout_constraintTop_toBottomOf="@+id/chooseBtn"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="20dp"
                     />
-            </LinearLayout>
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rcPlantTypes"
-                android:layout_width="match_parent"
-                android:layout_height="140dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginEnd="20dp"
-                android:orientation="horizontal"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/plant"
-                tools:ignore="MissingConstraints">
+                <TextView
+                    android:id="@+id/tvPhotographyTit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="Photography"
+                    android:textColor="@color/text_color_bold"
+                    android:textSize="20dp"
+                    android:textStyle="bold"
+                    android:layout_marginStart="20dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/rcPlantTypes" />
 
-            </androidx.recyclerview.widget.RecyclerView>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rcPhotography"
+                    android:layout_width="match_parent"
+                    android:layout_height="140dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:orientation="horizontal"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvPhotographyTit" />
 
-            <TextView
-                android:id="@+id/plant"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:text="Plant Type"
-                android:textColor="@color/text_color_bold"
-                android:textSize="20dp"
-                android:textStyle="bold"
-                app:layout_constraintTop_toBottomOf="@+id/chooseBtn"
-                app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="20dp"
-                />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+    </TableLayout>
+    </ScrollView>
 
-            <TextView
-                android:id="@+id/tvPhotographyTit"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="Photography"
-                android:textColor="@color/text_color_bold"
-                android:textSize="20dp"
-                android:textStyle="bold"
-                android:layout_marginStart="20dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/rcPlantTypes" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rcPhotography"
-                android:layout_width="match_parent"
-                android:layout_height="140dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginEnd="20dp"
-                android:orientation="horizontal"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvPhotographyTit" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
