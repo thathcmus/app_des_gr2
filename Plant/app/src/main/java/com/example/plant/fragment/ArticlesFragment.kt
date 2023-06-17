@@ -47,13 +47,17 @@ class ArticlesFragment : Fragment(), ArticleRecyclerAdapter.MyClickListener  {
             }
     }
     fun listenEvent() {
+        binding.ivBacktoHome.setOnClickListener() {
+            val fragmentManager = requireActivity().supportFragmentManager
+            fragmentManager.popBackStack()
+        }
     }
     override fun onClick(position: Int) {
         val ArticlesDetailFragment = ArticlesDetailFragment()
         val bundle = Bundle()
         bundle.putParcelable(constant.ARTICLE, articleList[position])
         ArticlesDetailFragment.arguments = bundle
-        FragmentUtil(this.activity).replaceFragment(ArticlesDetailFragment,R.id.HomeFrameLayout,false)
+        FragmentUtil(this.activity).replaceFragment(ArticlesDetailFragment,R.id.HomeFrameLayout,true)
     }
 
 }

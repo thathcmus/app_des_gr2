@@ -21,6 +21,7 @@ class PlantFragment : Fragment(), PlantRecyclerAdapter.MyClickListener  {
     private lateinit var binding: FragmentPlantBinding
     private var speciesName: String = ""
     private var plantList: MutableList<Plant> = mutableListOf()
+    private var plantListOfType: ArrayList<Plant>  = ArrayList()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -33,30 +34,46 @@ class PlantFragment : Fragment(), PlantRecyclerAdapter.MyClickListener  {
         return binding.root
     }
     fun getData () {
-        speciesName = arguments?.getString(constant.SPECIES).toString();
-        binding.tvPlantName.text = speciesName
+        speciesName = arguments?.getString(constant.SPECIES).toString()
+        plantListOfType = arguments?.getParcelableArrayList<Plant>(constant.PLANT) ?: ArrayList()
+        val typeName = arguments?.getString(constant.PLANT_TYPE)
+        binding.tvPlantName.text = typeName
+        //get data from SpeciesFragement
+        if(speciesName != "null"){
+            binding.tvPlantName.text = speciesName
             FirebaseFirestore.getInstance().collection("plant")
-            .whereEqualTo("species", speciesName)
-            .get()
-            .addOnSuccessListener { plant ->
-                plantList  = plant.toObjects(Plant::class.java)
-                //show into recycleview
-                binding.rcPlant.adapter = this.activity?.let {
-                    PlantRecyclerAdapter(plantList as ArrayList<Plant>,this@PlantFragment)
-                }
-                binding.rcPlant.layoutManager = LinearLayoutManager(this.requireContext(), LinearLayoutManager.VERTICAL, false)
-                binding.rcPlant.setHasFixedSize(true)
+                .whereEqualTo("species", speciesName)
+                .get()
+                .addOnSuccessListener { plant ->
+                    plantList  = plant.toObjects(Plant::class.java)
+                    //show into recycleview
+                    binding.rcPlant.adapter = this.activity?.let {
+                        PlantRecyclerAdapter(plantList as ArrayList<Plant>,this@PlantFragment)
+                    }
+                    binding.rcPlant.layoutManager = LinearLayoutManager(this.requireContext(), LinearLayoutManager.VERTICAL, false)
+                    binding.rcPlant.setHasFixedSize(true)
 
+                }
+                .addOnFailureListener { exception ->
+                }
+        }
+        // get plant List from HomeFragment
+        if(plantListOfType.size != 0) {
+            binding.rcPlant.apply {
+                adapter = PlantRecyclerAdapter(plantListOfType, this@PlantFragment)
+                layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
+                setHasFixedSize(true)
             }
-            .addOnFailureListener { exception ->
-            }
+        }
     }
     fun listenEvent() {
+        //click back btn
         binding.ivBacktoSpecies.setOnClickListener() {
             val fragmentManager = requireActivity().supportFragmentManager
             fragmentManager.popBackStack()
         }
     }
+    // click on item in Plant RecyclerView
     override fun onClick(position: Int) {
         val plantDetailFragment = PlantDetailFragment()
         val bundle = Bundle()

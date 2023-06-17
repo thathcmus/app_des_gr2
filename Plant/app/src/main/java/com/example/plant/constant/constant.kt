@@ -20,5 +20,6 @@ object constant {
     const val USER_PROFILE_IMAGE = "user_profile_image"
     const val SPECIES = "species"
     const val PLANT = "plant"
+    const val PLANT_TYPE = "plantType"
     const val ARTICLE = "article"
 }

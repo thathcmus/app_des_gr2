@@ -30,11 +30,11 @@ class PlantRecyclerAdapter(val plantList: ArrayList<Plant>, val listener: MyClic
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val data = plantList[position]
         holder.itemView.apply {
-            GlideLoader(context).loadUserPictureFromUrl(plantList[position].image,holder.itemView.ivPlant, R.drawable.placeholderloading)
-            tvPlantName.text = plantList[position].name
-            tvPlantKingdom.text = plantList[position].kingdom
-            tvFamily.text = plantList[position].family
-            tvDescPlant.text = plantList[position].description
+            GlideLoader(context).loadUserPictureFromUrl(data.image,holder.itemView.ivPlant, R.drawable.placeholderloading)
+            tvPlantName.text = data.name
+            tvPlantKingdom.text = data.kingdom
+            tvFamily.text = data.family
+            tvDescPlant.text = data.description
         }
     }
     override fun getItemCount(): Int {

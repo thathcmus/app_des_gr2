@@ -12,10 +12,12 @@ import com.example.plant.fragment.HomeFragment
 import com.example.plant.fragment.ProfileFragment
 import com.example.plant.fragment.UpdateProfileFragment
 import com.example.plant.model.Article
+import com.example.plant.model.Plant
 import com.example.plant.model.User
 import com.example.plant.util.ProgressBarLoading
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
@@ -75,21 +77,18 @@ class Firestore {
             }
     }
 
-//    fun getLikeBtnStatus(userId: String, postKey: String) {
-//        val likeReference = mFireStore.collection("likedArticles")
-//        likeReference
-//            .get()
-//            .addOnSuccessListener { articles ->
-//                articleList  = articles.toObjects(Article::class.java)
-//                //show into recycleview
-//                binding.rcArticles.adapter = this.activity?.let {
-//                    ArticleRecyclerAdapter(articleList as ArrayList<Article>,this@ArticlesFragment)
-//                }
-//                binding.rcArticles.layoutManager = LinearLayoutManager(this.requireContext(), LinearLayoutManager.VERTICAL, false)
-//                binding.rcArticles.setHasFixedSize(true)
-//
-//            }
-//            .addOnFailureListener { exception ->
-//            }
-//    }
+    fun getPlantListOfPlantType(plantTypeName: String, callback: (MutableList<Plant>) -> Unit) {
+        val plantList: MutableList<Plant> = mutableListOf()
+        FirebaseFirestore.getInstance().collection("plant")
+            .whereEqualTo("plantType", plantTypeName)
+            .get()
+            .addOnSuccessListener { plantDocuments ->
+                plantList.addAll(plantDocuments.toObjects(Plant::class.java))
+                callback(plantList)
+            }
+            .addOnFailureListener { exception ->
+                // Xử lý khi truy vấn thất bại
+            }
+    }
+
 }
