@@ -1,25 +1,34 @@
 package com.example.plant.adapter
 
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.example.plant.R
+import com.example.plant.constant.constant
+import com.example.plant.fragment.PlantDetailFragment
 import com.example.plant.glide.GlideLoader
 import com.example.plant.model.Plant
+import com.example.plant.util.FragmentUtil
 import kotlinx.android.synthetic.main.plant_item.view.ivPlant
 import kotlinx.android.synthetic.main.plant_item.view.tvDescPlant
 import kotlinx.android.synthetic.main.plant_item.view.tvFamily
 import kotlinx.android.synthetic.main.plant_item.view.tvPlantKingdom
 import kotlinx.android.synthetic.main.plant_item.view.tvPlantName
 
-class PlantRecyclerAdapter(val plantList: ArrayList<Plant>, val listener: MyClickListener) : RecyclerView.Adapter<PlantRecyclerAdapter.ViewHolder>() {
+class PlantRecyclerAdapter(val mFragment: Fragment, val plantList: ArrayList<Plant>) : RecyclerView.Adapter<PlantRecyclerAdapter.ViewHolder>() {
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         init {
             itemView.setOnClickListener {
                 val position = adapterPosition
-                listener.onClick(position)
-
+                val plantDetailFragment = PlantDetailFragment()
+                val bundle = Bundle()
+                bundle.putParcelable(constant.PLANT, plantList[position])
+                plantDetailFragment.arguments = bundle
+                FragmentUtil(mFragment.activity).replaceFragment(plantDetailFragment,
+                    R.id.HomeFrameLayout,true)
             }
         }
     }
@@ -39,10 +48,6 @@ class PlantRecyclerAdapter(val plantList: ArrayList<Plant>, val listener: MyClic
     }
     override fun getItemCount(): Int {
         return plantList.size
-    }
-    interface MyClickListener{
-        fun onClick(position: Int){
-        }
     }
 
 }
