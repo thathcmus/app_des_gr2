@@ -23,6 +23,8 @@ import com.example.plant.util.FragmentUtil
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.fragment_home.ivAvatar
 import kotlinx.android.synthetic.main.fragment_home.tvNameUserHome
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class HomeFragment : Fragment() {
     private lateinit var binding:FragmentHomeBinding
@@ -52,7 +54,9 @@ class HomeFragment : Fragment() {
 
     private fun getData() {
         //get user info
-        Firestore().getUserDetail(this)
+        GlobalScope.launch {
+            Firestore().getUserDetail(this@HomeFragment)
+        }
         ///get photography list
         FirebaseFirestore.getInstance().collection("photography")
                 .get()
@@ -134,7 +138,7 @@ class HomeFragment : Fragment() {
     }
 
     fun ShowUIInfo(UserInfo : User){
-        this.activity?.let { GlideLoader(it).loadUserPictureFromUrl(UserInfo.avatar,ivAvatar, R.drawable.placeholder) }
-        tvNameUserHome.text = UserInfo?.fullName
+        this.activity?.let { GlideLoader(it).loadUserPictureFromUrl(UserInfo.avatar,binding.ivAvatar, R.drawable.placeholder) }
+        binding.tvNameUserHome.text = UserInfo?.fullName
     }
 }

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/article_action"
+        android:icon="@drawable/article_icon"
+        android:title="Articles"
+        app:cnb_iconColor="#3E99ED"
+        />
+    <item
+        android:id="@+id/plant_action"
+        android:icon="@drawable/tree"
+        android:title="Plants"
+        app:cnb_iconColor="#3E99ED"/>
+</menu>

@@ -15,7 +15,7 @@ import com.example.plant.model.Article
 import com.example.plant.util.FragmentUtil
 import com.google.firebase.firestore.FirebaseFirestore
 
-class ArticlesFragment : Fragment(), ArticleRecyclerAdapter.MyClickListener  {
+class ArticlesFragment : Fragment()  {
     private lateinit var binding: FragmentArticlesBinding
     private var articleList: MutableList<Article> = mutableListOf()
     override fun onCreateView(
@@ -37,7 +37,7 @@ class ArticlesFragment : Fragment(), ArticleRecyclerAdapter.MyClickListener  {
                 articleList  = articles.toObjects(Article::class.java)
                 //show into recycleview
                 binding.rcArticles.adapter = this.activity?.let {
-                    ArticleRecyclerAdapter(articleList as ArrayList<Article>,this@ArticlesFragment)
+                    ArticleRecyclerAdapter(this@ArticlesFragment,articleList as ArrayList<Article>)
                 }
                 binding.rcArticles.layoutManager = LinearLayoutManager(this.requireContext(), LinearLayoutManager.VERTICAL, false)
                 binding.rcArticles.setHasFixedSize(true)
@@ -51,13 +51,6 @@ class ArticlesFragment : Fragment(), ArticleRecyclerAdapter.MyClickListener  {
             val fragmentManager = requireActivity().supportFragmentManager
             fragmentManager.popBackStack()
         }
-    }
-    override fun onClick(position: Int) {
-        val ArticlesDetailFragment = ArticlesDetailFragment()
-        val bundle = Bundle()
-        bundle.putParcelable(constant.ARTICLE, articleList[position])
-        ArticlesDetailFragment.arguments = bundle
-        FragmentUtil(this.activity).replaceFragment(ArticlesDetailFragment,R.id.HomeFrameLayout,true)
     }
 
 }

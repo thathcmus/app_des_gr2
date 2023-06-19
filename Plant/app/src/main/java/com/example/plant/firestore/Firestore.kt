@@ -37,7 +37,6 @@ class Firestore {
     fun getCurrentUserAuth(): FirebaseUser? {
         return Firebase.auth.currentUser
     }
-
     fun getUserDetail(mFragment: Fragment) {
         mFireStore.collection(constant.USER_COLLECTION).document(getCurrentUserAuth()!!.uid)
             .get()
@@ -47,7 +46,7 @@ class Firestore {
                     when(mFragment) {
                         is ProfileFragment -> {
                             mFragment.setCurrentUser(currentUser)
-                            mFragment.ShowUIInfo(currentUser)
+                            mFragment.showUIInfo(currentUser)
                         }
                         is HomeFragment -> {
                             mFragment.setCurrentUser(currentUser)
@@ -88,6 +87,22 @@ class Firestore {
             }
             .addOnFailureListener { exception ->
                 // Xử lý khi truy vấn thất bại
+            }
+    }
+
+    fun getArticleIds(userId: String,callback: (ArrayList<String>) -> Unit){
+        val plantIds : ArrayList<String> = ArrayList()
+        FirebaseFirestore.getInstance().collection("likedPlant")
+            .whereEqualTo(userId, true)
+            .get()
+            .addOnSuccessListener { documents ->
+                for (document in documents) {
+                    plantIds.add(document.id)
+                }
+                callback(plantIds)
+            }
+            .addOnFailureListener { exception ->
+                Log.w("Error", "Error getting Plant Ids firetore: ", exception)
             }
     }
 

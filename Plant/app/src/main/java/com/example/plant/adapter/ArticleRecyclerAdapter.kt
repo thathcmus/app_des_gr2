@@ -1,14 +1,19 @@
 package com.example.plant.adapter
 
+import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.example.plant.R
+import com.example.plant.constant.constant
 import com.example.plant.firestore.Firestore
+import com.example.plant.fragment.ArticlesDetailFragment
 import com.example.plant.glide.GlideLoader
 import com.example.plant.model.Article
+import com.example.plant.util.FragmentUtil
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.articles_item.view.ivArticles
@@ -18,7 +23,7 @@ import kotlinx.android.synthetic.main.articles_item.view.titleArticles
 import kotlinx.android.synthetic.main.articles_item.view.tvPostDay
 import kotlinx.android.synthetic.main.articles_item.view.tvPosterName
 
-class ArticleRecyclerAdapter(val articleList: ArrayList<Article>, val listener: MyClickListener) : RecyclerView.Adapter<ArticleRecyclerAdapter.ViewHolder>() {
+class ArticleRecyclerAdapter(val mFragment: Fragment, val articleList: ArrayList<Article>) : RecyclerView.Adapter<ArticleRecyclerAdapter.ViewHolder>() {
    private val userId: String =  Firestore().getCurrentUserAuth()!!.uid
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun getLikeBtnStatus(userId: String, postKey: String, holder: ViewHolder, position: Int) {
@@ -36,8 +41,11 @@ class ArticleRecyclerAdapter(val articleList: ArrayList<Article>, val listener: 
         init {
             itemView.setOnClickListener {
                 val position = adapterPosition
-                listener.onClick(position)
-
+                val articlesDetailFragment = ArticlesDetailFragment()
+                val bundle = Bundle()
+                bundle.putParcelable(constant.ARTICLE, articleList[position])
+                articlesDetailFragment.arguments = bundle
+                FragmentUtil(mFragment.activity).replaceFragment(articlesDetailFragment,R.id.HomeFrameLayout,true)
             }
             //click liked btn
             itemView.likeBtn.setOnClickListener {
@@ -88,10 +96,6 @@ class ArticleRecyclerAdapter(val articleList: ArrayList<Article>, val listener: 
     }
     override fun getItemCount(): Int {
         return articleList.size
-    }
-    interface MyClickListener{
-        fun onClick(position: Int){
-        }
     }
 
 }

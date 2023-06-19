@@ -70,7 +70,8 @@ class ArticlesDetailFragment : Fragment() {
 
     fun listenEvent() {
         binding.ivBackArticle.setOnClickListener() {
-            FragmentUtil(this.activity).replaceFragment(ArticlesFragment(),R.id.HomeFrameLayout,false)
+            val fragmentManager = requireActivity().supportFragmentManager
+            fragmentManager.popBackStack()
         }
 
         binding.likedBtnDetail.setOnClickListener() {

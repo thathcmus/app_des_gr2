@@ -90,7 +90,7 @@ dependencies {
     //fireStore
     implementation platform('com.google.firebase:firebase-bom:32.0.0')
     implementation 'com.google.firebase:firebase-firestore-ktx'
-//    implementation 'com.firebaseui:firebase-ui-firestore:8.0.2'
+
     //firebase storage
     implementation 'com.google.firebase:firebase-storage-ktx'
     //noinspection GradleCompatible
@@ -98,9 +98,12 @@ dependencies {
     //glide
     implementation 'com.github.bumptech.glide:glide:4.15.1'
     //coroutines
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.0"
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.0'
 
     implementation 'com.github.myinnos:AlphabetIndex-Fast-Scroll-RecyclerView:1.0.98'
+    // chip button bar
+    implementation 'com.github.ismaeldivita:chip-navigation-bar:1.4.0'
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
