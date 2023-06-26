@@ -35,19 +35,20 @@
             android:layout_marginStart="30dp"
             android:layout_marginBottom="20dp"
             />
+
         <EditText
             android:id="@+id/etSearchArticles"
             android:layout_width="match_parent"
             android:layout_height="46dp"
             android:layout_marginStart="30dp"
             android:layout_marginEnd="30dp"
-            android:hint="Search For Plants"
             android:background="@drawable/searrch"
+            android:hint="Search For Articles"
             android:paddingStart="20dp"
-            android:paddingEnd="20dp" app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:paddingEnd="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
     <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rcArticles"
