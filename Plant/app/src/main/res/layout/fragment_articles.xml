@@ -30,25 +30,33 @@
             android:textColor="@color/white"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toTopOf="@+id/etSearchArticles"
+            app:layout_constraintBottom_toTopOf="@+id/cardView"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginStart="30dp"
             android:layout_marginBottom="20dp"
             />
 
-        <EditText
-            android:id="@+id/etSearchArticles"
-            android:layout_width="match_parent"
-            android:layout_height="46dp"
-            android:layout_marginStart="30dp"
-            android:layout_marginEnd="30dp"
-            android:background="@drawable/searrch"
-            android:hint="Search For Articles"
-            android:paddingStart="20dp"
-            android:paddingEnd="20dp"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="314dp"
+            android:layout_margin="3dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintVertical_bias="1.0">
+
+            <androidx.appcompat.widget.SearchView
+                android:id="@+id/searchSpecies"
+                android:layout_width="300sp"
+                android:layout_height="50sp"
+                android:background="@color/white"
+                app:queryHint="Search for species"
+                app:iconifiedByDefault="false" />
+
+        </androidx.cardview.widget.CardView>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
     <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rcArticles"

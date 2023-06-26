@@ -5,13 +5,16 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.SearchView.OnQueryTextListener
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.plant.R
 import com.example.plant.adapter.ArticleRecyclerAdapter
+import com.example.plant.adapter.SpeciesRecyclerAdapter
 import com.example.plant.constant.constant
 import com.example.plant.databinding.FragmentArticlesBinding
 import com.example.plant.model.Article
+import com.example.plant.model.Species
 import com.example.plant.util.FragmentUtil
 import com.google.firebase.firestore.FirebaseFirestore
 
@@ -51,6 +54,34 @@ class ArticlesFragment : Fragment()  {
             val fragmentManager = requireActivity().supportFragmentManager
             fragmentManager.popBackStack()
         }
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.searchSpecies.setOnQueryTextListener(object: OnQueryTextListener{
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+
+                // thiết lập search cho article lại không cần phải lưu List vào 1 biến khác để khôi
+                // phục dữ liệu như bên SpeciesFragment, không biết rõ tại sao
+
+                val filteredArticleList = articleList.filter { article ->
+                    newText?.let { article.title.contains(it.trim(), ignoreCase = true) } == true ||
+                            newText?.let { article.posterName.contains(it.trim(), ignoreCase = true) } == true
+                }
+
+                // đưa adapter filteredArticleList vào rcArticle để hiển thị danh sách tìm kiếm
+                binding.rcArticles.adapter =
+                    ArticleRecyclerAdapter(this@ArticlesFragment,filteredArticleList as ArrayList<Article>)
+
+                return false
+            }
+
+        })
     }
 
 }
