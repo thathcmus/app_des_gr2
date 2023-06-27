@@ -5,13 +5,16 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.plant.R
 import com.example.plant.adapter.PlantRecyclerAdapter
+import com.example.plant.adapter.SpeciesRecyclerAdapter
 import com.example.plant.constant.constant
 import com.example.plant.databinding.FragmentPlantBinding
 import com.example.plant.model.Plant
+import com.example.plant.model.Species
 import com.example.plant.util.FragmentUtil
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
@@ -22,6 +25,8 @@ class PlantFragment : Fragment() {
     private var speciesName: String = ""
     private var plantList: MutableList<Plant> = mutableListOf()
     private var plantListOfType: ArrayList<Plant>  = ArrayList()
+
+    private var plantListOfTypeOrigin: ArrayList<Plant>  = ArrayList()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -65,6 +70,7 @@ class PlantFragment : Fragment() {
                 setHasFixedSize(true)
             }
         }
+        plantListOfTypeOrigin = plantListOfType
     }
     fun listenEvent() {
         //click back btn
@@ -72,5 +78,33 @@ class PlantFragment : Fragment() {
             val fragmentManager = requireActivity().supportFragmentManager
             fragmentManager.popBackStack()
         }
+    }
+
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        // androidx Search view to species
+        binding.searchPlants.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String): Boolean {
+
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String): Boolean {
+
+                val filteredSpeciesList = plantListOfType.filter { species ->
+                    species.name.contains(newText.trim(), ignoreCase = true)
+                }
+
+                binding.rcPlant.adapter =
+                    PlantRecyclerAdapter(this@PlantFragment,
+                        filteredSpeciesList as ArrayList<Plant>
+                    )
+
+                return false
+            }
+
+        })
     }
 }
