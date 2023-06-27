@@ -13,12 +13,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.camera.core.CameraProvider
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageCapture
 import androidx.camera.core.ImageCaptureException
 import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
+import com.example.plant.R
 import com.example.plant.databinding.FragmentCameraBinding
 import java.text.SimpleDateFormat
 import java.util.Locale
@@ -30,6 +32,8 @@ class CameraFragment : Fragment() {
     private lateinit var binding: FragmentCameraBinding
     private var imageCapture: ImageCapture? = null
     private lateinit var cameraExecutor: ExecutorService
+
+    private var isFlash = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -56,6 +60,21 @@ class CameraFragment : Fragment() {
 
         binding.imageCaptureButton.setOnClickListener { takePhoto() }
 
+        binding.btnFlash.setOnClickListener {
+            if(!isFlash){
+                imageCapture?.flashMode = ImageCapture.FLASH_MODE_ON
+                isFlash = true
+                binding.btnFlash.isActivated = true
+                binding.tvFlashStatus.text = "ON"
+            } else {
+                imageCapture?.flashMode = ImageCapture.FLASH_MODE_OFF
+                isFlash = false
+                binding.btnFlash.isActivated = false
+                binding.tvFlashStatus.text = "OFF"
+            }
+
+        }
+
         cameraExecutor = Executors.newSingleThreadExecutor()
     }
 
@@ -72,7 +91,7 @@ class CameraFragment : Fragment() {
         private val REQUIRED_PERMISSIONS =
             mutableListOf (
                 Manifest.permission.CAMERA,
-                Manifest.permission.RECORD_AUDIO
+                //Manifest.permission.RECORD_AUDIO
             ).apply {
                 // sau khi tạo danh sách quyền camera, kiểm tra nếu như phiên
                 // bản android từ 29 trở xuống thì thêm yêu cầu quyền WRITE_EXTERNAL_STORAGE
@@ -159,7 +178,7 @@ class CameraFragment : Fragment() {
             put(MediaStore.MediaColumns.DISPLAY_NAME, name)
             put(MediaStore.MediaColumns.MIME_TYPE, "image/jpeg")
             if(Build.VERSION.SDK_INT > Build.VERSION_CODES.P) {
-                put(MediaStore.Images.Media.RELATIVE_PATH, "Pictures/Plants")
+                put(MediaStore.Images.Media.RELATIVE_PATH, "Pictures/PlantApp")
             }
         }
 

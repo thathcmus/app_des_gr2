@@ -9,15 +9,36 @@
     <androidx.camera.view.PreviewView
         android:id="@+id/viewFinder"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"></androidx.camera.view.PreviewView>
+
+    <Button
+        android:id="@+id/btnFlash"
+        android:layout_width="20dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/flash_button_drawable"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvFlashStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_marginStart="8dp"
+        android:text="OFF"
+        android:textColor="@color/white"
+        app:layout_constraintStart_toEndOf="@+id/btnFlash"
+        app:layout_constraintTop_toTopOf="@+id/btnFlash" />
+
 
     <Button
         android:id="@+id/image_capture_button"
         android:layout_width="70sp"
         android:layout_height="70sp"
         android:layout_marginBottom="16dp"
-        android:elevation="10dp"
         android:background="@drawable/take_photo_button_drawable"
+        android:elevation="10dp"
         app:backgroundTint="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
