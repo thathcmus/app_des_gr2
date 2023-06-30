@@ -26,7 +26,7 @@ class PlantFragment : Fragment() {
     private var plantList: MutableList<Plant> = mutableListOf()
     private var plantListOfType: ArrayList<Plant>  = ArrayList()
 
-    private var plantListOfTypeOrigin: ArrayList<Plant>  = ArrayList()
+    private var plantListOrigin: ArrayList<Plant>  = ArrayList()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -51,6 +51,7 @@ class PlantFragment : Fragment() {
                 .get()
                 .addOnSuccessListener { plant ->
                     plantList  = plant.toObjects(Plant::class.java)
+                    plantListOrigin = plantList as ArrayList<Plant>
                     //show into recycleview
                     binding.rcPlant.adapter = this.activity?.let {
                         PlantRecyclerAdapter(this@PlantFragment, plantList as ArrayList<Plant>)
@@ -69,8 +70,9 @@ class PlantFragment : Fragment() {
                 layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
                 setHasFixedSize(true)
             }
+            plantListOrigin = plantListOfType
         }
-        plantListOfTypeOrigin = plantListOfType
+
     }
     fun listenEvent() {
         //click back btn
@@ -92,11 +94,16 @@ class PlantFragment : Fragment() {
             }
 
             override fun onQueryTextChange(newText: String): Boolean {
-
-                val filteredSpeciesList = plantListOfType.filter { species ->
-                    species.name.contains(newText.trim(), ignoreCase = true)
+                var filteredSpeciesList: ArrayList<Plant> = ArrayList()
+                if(plantListOfType.size != 0){
+                    filteredSpeciesList = plantListOfType.filter { species ->
+                        species.name.contains(newText.trim(), ignoreCase = true)
+                    } as ArrayList<Plant>
+                }else {
+                    filteredSpeciesList = plantList.filter { species ->
+                        species.name.contains(newText.trim(), ignoreCase = true)
+                    } as ArrayList<Plant>
                 }
-
                 binding.rcPlant.adapter =
                     PlantRecyclerAdapter(this@PlantFragment,
                         filteredSpeciesList as ArrayList<Plant>
