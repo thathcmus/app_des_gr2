@@ -21,9 +21,9 @@ class IntroductionActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_introduction)
-
+        //hide action bar
         supportActionBar?.hide()
-
+        // Intro UI
         createIntro()
         // listen event
         btnNext.setOnClickListener {

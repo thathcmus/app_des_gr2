@@ -25,10 +25,11 @@ class RegisterActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
+        //hide action bar
         supportActionBar?.hide()
-
+        //get user instance
         mAuth = FirebaseAuth.getInstance()
-
+        // listen register button event
         btnRegister.setOnClickListener() {
             register()
         }
@@ -67,7 +68,7 @@ class RegisterActivity : AppCompatActivity() {
             etRegisterPass.requestFocus()
             return
         }
-
+        //start Loading Dialog
         loadingDialog.startLoading()
 
         //create account on firebase
@@ -78,11 +79,14 @@ class RegisterActivity : AppCompatActivity() {
                     val userInfo = User(
                         firebaseUser.uid,nameStr,emailStr, 0 ,"", locaStr, ""
                     )
+                    // store User Info into Firestore
                     Firestore().registerUser(this,userInfo)
+                    //imform register success
                     registerSuccess()
                 }
                 else
                 {
+                    // inform create account failed
                     loadingDialog.hideLoading()
                     Toast.makeText(this, "Create account failed!", Toast.LENGTH_SHORT).show()
                 }

@@ -22,15 +22,17 @@ class HomeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
+        //hide action bar
         supportActionBar?.hide()
+        // init Home Fragement into Home frame layout
         init()
+        //listen event
         listenerEvent()
 
         val floatingBtnAdding = findViewById<FloatingActionButton>(R.id.floatingBtnAdding)
             .setOnClickListener {
                 startActivity(Intent(this, AddingNewActivity::class.java))
             }
-
     }
     fun init()
     {
@@ -39,10 +41,12 @@ class HomeActivity : AppCompatActivity() {
     fun listenerEvent(){
         bottomNavBar.setOnItemSelectedListener { item ->
             when(item.itemId){
+                // if click home action -> set Home Fragement into Home Frame Layout
                 R.id.home_action ->  {
                     replaceFragment(HomeFragment())
                     true
                 }
+                // if click profile action -> set Profile Fragement into Home Frame Layout
                 R.id.profile_action -> {
                     replaceFragment(ProfileFragment())
                     true

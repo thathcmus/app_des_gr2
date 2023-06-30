@@ -42,7 +42,9 @@ class UpdateProfileFragment : Fragment(),View.OnClickListener {
     ): View? {
         // Inflate the layout for this fragment
         binding = FragmentUpdateProfileBinding.inflate(layoutInflater)
+        // retrieve existing information to update fields
         updateFields()
+        // listen event click Avatar
         binding.ivUpdateUserAvatar.setOnClickListener(this@UpdateProfileFragment)
         listenerEvent()
         return binding.root
@@ -51,6 +53,7 @@ class UpdateProfileFragment : Fragment(),View.OnClickListener {
     private fun updateFields() {
         val bundle = this.arguments
         if (bundle != null) {
+            // get infomation of User from Profile Fragment
             currentUser = bundle?.let { User::class.getParcelable(it, constant.USER_DETAIL) }!!
             this.activity?.let { GlideLoader(it).loadUserPictureFromUrl(currentUser.avatar, binding.ivUpdateUserAvatar,R.drawable.placeholder) }
             binding.etUpdateName.setText(currentUser?.fullName)
@@ -70,6 +73,7 @@ class UpdateProfileFragment : Fragment(),View.OnClickListener {
         else
             bundle.getParcelable(key)
 
+    // click on avatar
     override fun onClick(v: View?) {
         if (v != null) {
             when (v.id) {
@@ -148,16 +152,17 @@ class UpdateProfileFragment : Fragment(),View.OnClickListener {
     }
 
     private fun listenerEvent() {
+        // click Update Btn
         binding.btnUpdateInfo.setOnClickListener() {
             val userName = binding.etUpdateName.text.trim().toString()
             val phoneNum = binding.etUpdatePhone.text.trim().toString()
             val gender = binding.etUpdateGender.text.trim().toString()
             val location = binding.etUpdateLocation.text.trim().toString()
+            // validate data
             val (isValidateName, NameMessError) = validateName(userName)
             val (isValidatePhoneNum, PhoneNumMessError) = validatePhoneNum(phoneNum)
             val (isValidateGender, GenderMessError) = validateGender(gender)
             val (isValidateLocation, LocationMessError) = validateLocation(location)
-
             if (!isValidateName) {
                 binding.etUpdateName.error = NameMessError
             }
@@ -170,6 +175,7 @@ class UpdateProfileFragment : Fragment(),View.OnClickListener {
             if (!isValidateLocation) {
                 binding.etUpdateLocation.error = LocationMessError
             }
+            //when validate success
             if (isValidateName && isValidatePhoneNum && isValidateGender && isValidateLocation) {
                 val loadingDialog = ProgressBarLoading(activity)
                 loadingDialog.startLoading()
@@ -184,6 +190,7 @@ class UpdateProfileFragment : Fragment(),View.OnClickListener {
                         }
                     }
                     val userHashMap = HashMap<String, Any>()
+                    //wait image store into FireStore success
                     selectedImageUrl = imageUrlDeferred.await()!!
                     if(selectedImageUrl.isNotEmpty()){
                         userHashMap[constant.USER_AVATAR] = selectedImageUrl
@@ -192,6 +199,7 @@ class UpdateProfileFragment : Fragment(),View.OnClickListener {
                     userHashMap[constant.USER_PHONE] = phoneNum.toString().trim().toLong()
                     userHashMap[constant.USER_GENDER] = gender
                     userHashMap[constant.USER_LOCATION] = location
+                    // update new user information into Firestore
                     Firestore().updateUserInfo(this@UpdateProfileFragment, userHashMap)
                     loadingDialog.hideLoading()
                 }

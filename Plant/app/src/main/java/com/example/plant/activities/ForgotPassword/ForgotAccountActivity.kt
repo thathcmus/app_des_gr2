@@ -19,11 +19,11 @@ class ForgotAccountActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_forgot_account)
-
+        //hide action bar
         supportActionBar?.hide()
-
+        //get user instance
         mAuth = FirebaseAuth.getInstance()
-
+        //listen reset button event
         btnReset.setOnClickListener() {
             reset()
         }
